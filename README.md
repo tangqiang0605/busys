@@ -19,6 +19,27 @@
 pnpm dev:client 启动客户端
 pnpm dev:server 启动服务器
 
+## 代码提交
+
+git commit 需要符合规范 https://www.conventionalcommits.org/en/
+
+分支采用多分支模型管理
+1. 开发功能时从主分支切出新分支并开发。
+2. 开发完成后提pr合入主分支。
+3. 如果存在冲突：
+```
+# 当前为特性分支
+git fetch origin main
+git rebase -i origin/main
+
+(处理冲突，完成rebase)
+
+git push -f
+
+(提交新的pr)
+```
+
+
 ## monorepo
 
 本仓库采用pnpm+monorepo方式管理。
@@ -35,14 +56,14 @@ pnpm dev:server 启动服务器
 常用命令：
 ```
 # 在根目录执行命令
-pnpm <cmd>
+pnpm -w <cmd>
 # 执行子项目的命令
 pnpm --filter <package-name> <cmd>
 
 # 例如
 
 # 添加依赖到所有项目，通常是 devDenpendice 公用基建。
-pnpm add eslint -D
+pnpm -w add husky -D
 # 添加依赖到某个项目
 pnpm -f client add lodash
 pnpm -f @busys/algorithm add lodash
