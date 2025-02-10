@@ -69,3 +69,6 @@ pnpm -f client add lodash
 pnpm -f @busys/algorithm add lodash
 ```
 
+## 文档
+
+周计划/日计划写在apps/doc/blog下，比如 apps\doc\blog\0210周计划.md
