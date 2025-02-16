@@ -1,0 +1,34 @@
+### Create a new user (POST)
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "password_hash": "hashed_password_123",
+  "role_id": ["role1", "role2"],
+  "is_active": true,
+  "metadata": {
+    "driver_id": "driver_001"
+  }
+}
+
+### Get all users (GET)
+GET http://localhost:3000/user
+
+### Get user by ID (GET)
+GET http://localhost:3000/user/1
+
+### Update user by ID (PUT)
+PUT http://localhost:3000/user/1
+Content-Type: application/json
+
+{
+  "password_hash": "new_hashed_password",
+  "role_id": ["role3"],
+  "is_active": false,
+  "metadata": {
+    "driver_id": "driver_002"
+  }
+}
+
+### Delete user by ID (DELETE)
+DELETE http://localhost:3000/user/1
