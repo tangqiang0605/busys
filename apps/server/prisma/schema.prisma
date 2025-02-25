@@ -11,21 +11,25 @@ generator client {
 
 // 用户表：存储用户的基本信息和权限
 model User {
-  user_id       Int     @id @default(autoincrement()) // 用户唯一标识
-  password_hash String  @db.VarChar(255) // 用户密码哈希
-  role_id       Json    @db.Json // 权限ID数组（JSON格式）
-  is_active     Boolean @default(true) // 账号是否可用
-  metadata      Json    @db.Json // 其他元信息（如司机账号绑定司机ID）
-  roles         Role[]  @relation(name: "UserRole") // 关联角色权限表
+  user_id       Int      @id @default(autoincrement()) // 用户唯一标识
+  password_hash String   @db.VarChar(255) // 用户密码哈希
+  is_active     Boolean  @default(true) // 账号是否可用
+  metadata      Json     @db.Json // 其他元信息（如司机账号绑定司机ID）
+  role_id       Int
+  role          Role     @relation(fields: [role_id], references: [role_id])
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }
 
 // 角色权限表：存储角色的权限信息
 model Role {
-  role_id         Int    @id @default(autoincrement()) // 权限ID
-  role_name       String @db.VarChar(100) // 角色名称（如司机、管理员等）
-  allowed_routes  Json   @db.Json // 允许访问的路由（JSON数组）
-  allowed_actions Json   @db.Json // 允许执行的操作（JSON数组）
-  users           User[] @relation(name: "UserRole") // 关联用户表
+  role_id         Int      @id @default(autoincrement()) // 权限ID
+  role_name       String   @db.VarChar(100) // 角色名称（如司机、管理员等）
+  allowed_routes  Json     @db.Json // 允许访问的路由（JSON数组）
+  allowed_actions Json     @db.Json // 允许执行的操作（JSON数组）
+  users           User[] // 关联用户表
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
 }
 
 // 司机信息表：存储司机的基本信息
@@ -39,28 +43,65 @@ model DriverInfo {
   DriverSchedule      DriverSchedule[]
   PassengerFeedback   PassengerFeedback[]
   VehicleOperation    VehicleOperation[]
+  created_at          DateTime            @default(now())
+  updated_at          DateTime            @updatedAt
 }
 
 // 司机工作时间安排表：存储司机的排班信息
 model DriverSchedule {
-  schedule_id       Int        @id @default(autoincrement()) // 排班ID
+  schedule_id       Int           @id @default(autoincrement()) // 排班ID
   driver_id         Int // 司机ID（外键）
   fixed_schedule_id Int // 固定工作时间表ID（外键）
-  extra_schedule_id Int? // 不固定工作时间表ID（如加班、放假）
-  driver            DriverInfo @relation(fields: [driver_id], references: [driver_id]) // 关联司机信息表
+  fixed_schedule    FixedSchedule @relation(fields: [fixed_schedule_id], references: [schedule_id])
+  extra_schedule_id Int // 不固定工作时间表ID（如加班、放假）
+  extra_schedule    ExtraSchedule @relation(fields: [extra_schedule_id], references: [schedule_id])
+  driver            DriverInfo    @relation(fields: [driver_id], references: [driver_id]) // 关联司机信息表
+  created_at        DateTime      @default(now())
+  updated_at        DateTime      @updatedAt
+}
+
+// 固定工作时间表
+model FixedSchedule {
+  schedule_id     Int    @id @default(autoincrement())
+  description     String @db.VarChar(100)
+  weekly_schedule Json   @db.Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 关联司机工作时间安排表
+  driverSchedules DriverSchedule[]
+}
+
+// 不固定工作时间表
+model ExtraSchedule {
+  schedule_id      Int    @id @default(autoincrement())
+  description      String @db.VarChar(100)
+  special_schedule Json   @db.Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 关联司机工作时间安排表
+  driverSchedules DriverSchedule[]
 }
 
 // 职工基本信息表：存储职工的基本信息
 model Employee {
-  employee_id  Int         @id @default(autoincrement()) // 职工ID
-  name         String      @db.VarChar(100) // 姓名
-  birth_date   DateTime // 出生日期
-  gender       String      @db.VarChar(10) // 性别
-  address      String      @db.VarChar(100) // 地址
-  phone_number String      @db.VarChar(15) // 联系电话
-  id_type      String      @db.VarChar(50) // 身份证件类型
-  id_number    String      @db.VarChar(50) // 身份证件号
-  driverInfo   DriverInfo? // 关联司机信息表
+  employee_id         Int                   @id @default(autoincrement()) // 职工ID
+  name                String                @db.VarChar(100) // 姓名
+  birth_date          DateTime // 出生日期
+  gender              String                @db.VarChar(10) // 性别
+  address             String                @db.VarChar(100) // 地址
+  phone_number        String                @db.VarChar(15) // 联系电话
+  id_type             String                @db.VarChar(50) // 身份证件类型
+  id_number           String                @db.VarChar(50) // 身份证件号
+  driverInfo          DriverInfo? // 关联司机信息表
+  created_at          DateTime              @default(now())
+  updated_at          DateTime              @updatedAt
+  EmployeePositions   EmployeePositions[]
+  StationMaintenance  StationMaintenance[]
+  FacilityMaintenance FacilityMaintenance[]
 }
 
 // 乘客反馈表：记录乘客的反馈信息
@@ -77,14 +118,16 @@ model PassengerFeedback {
 
 // 维护申请表：记录维护申请的信息
 model MaintenanceRequest {
-  request_id          Int                  @id @default(autoincrement()) // 申请ID
+  request_id          Int                   @id @default(autoincrement()) // 申请ID
   request_date        DateTime // 申请发起日期
   request_description String // 维护申请描述
-  request_type        String               @db.VarChar(50) // 申请类型（如定期维护、修复）
-  maintenance_type    String               @db.VarChar(50) // 维护类型（如车辆、设施）
+  request_type        String                @db.VarChar(50) // 申请类型（如定期维护、修复）
+  maintenance_type    String                @db.VarChar(50) // 维护类型（如车辆、设施）
   maintenance_id      String // 维护目标ID（如车辆ID）
-  approval_status     String               @db.VarChar(20) // 审批状态（如审批中、通过、拒绝）
+  approval_status     String                @db.VarChar(20) // 审批状态（如审批中、通过、拒绝）
   vehicleMaintenance  VehicleMaintenance[] // 关联车辆维护记录表
+  StationMaintenance  StationMaintenance[]
+  FacilityMaintenance FacilityMaintenance[]
 }
 
 // 车辆维护记录表：记录车辆的维护信息
@@ -108,16 +151,22 @@ model Route {
   routeDetails     RouteDetail[] // 关联路线详情表
   routeSchedules   RouteSchedule[] // 关联路线班次表
   VehicleOperation VehicleOperation[]
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  Fare             Fare[]
+  FareBills        FareBills[]
 }
 
 // 路线详情表：存储路线的具体站点信息
 model RouteDetail {
-  detail_id     Int     @id @default(autoincrement()) // 记录ID
+  detail_id     Int      @id @default(autoincrement()) // 记录ID
   route_id      Int // 路线ID（外键）
   station_id    Int // 车站ID（外键）
   station_order Int // 车站顺序（该站点在路线中的序号）
-  route         Route   @relation(fields: [route_id], references: [route_id]) // 关联路线信息表
-  station       Station @relation(fields: [station_id], references: [station_id]) // 关联车站信息表
+  route         Route    @relation(fields: [route_id], references: [route_id]) // 关联路线信息表
+  station       Station  @relation(fields: [station_id], references: [station_id]) // 关联车站信息表
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }
 
 // 路线班次表：存储具体的班次信息
@@ -129,6 +178,8 @@ model RouteSchedule {
   end_time          DateTime            @db.Time // 结束时间
   route             Route               @relation(fields: [route_id], references: [route_id]) // 关联路线信息表
   PassengerFeedback PassengerFeedback[]
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
 }
 
 // 车站信息表：存储车站的基本信息
@@ -138,6 +189,9 @@ model Station {
   location            String                @db.VarChar(255) // 车站位置（经纬度）
   routeDetails        RouteDetail[] // 关联路线详情表
   stationSurveillance StationSurveillance[] // 关联车站监控信息表
+  created_at          DateTime              @default(now())
+  updated_at          DateTime              @updatedAt
+  StationMaintenance  StationMaintenance[]
 }
 
 // 车站监控信息表：记录车站的监控数据
@@ -148,6 +202,8 @@ model StationSurveillance {
   timestamp       DateTime @db.Timestamp(3) // 时间戳
   passenger_count Int // 乘客数量
   station         Station  @relation(fields: [station_id], references: [station_id]) // 关联车站信息表
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
 }
 
 // 车辆基本信息表：存储车辆的基本信息
@@ -165,6 +221,9 @@ model Vehicle {
   image_url          String? // 车辆图片URL
   vehicleOperations  VehicleOperation[] // 关联车辆运行表
   vehicleMaintenance VehicleMaintenance[] // 关联车辆维护记录表
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  FareBills          FareBills[]
 }
 
 // 车辆运行表：记录车辆的运行信息
@@ -176,4 +235,197 @@ model VehicleOperation {
   vehicle      Vehicle    @relation(fields: [vehicle_id], references: [vehicle_id]) // 关联车辆基本信息表
   route        Route      @relation(fields: [route_id], references: [route_id]) // 关联路线信息表
   driver       DriverInfo @relation(fields: [driver_id], references: [driver_id]) // 关联司机信息表
+  created_at   DateTime   @default(now())
+  updated_at   DateTime   @updatedAt
+}
+
+// 职工岗位表：记录职工的岗位信息，包括开始和结束日期
+model EmployeePositions {
+  position_id Int       @id @default(autoincrement()) // 岗位记录 ID，主键
+  employee_id Int       @db.Integer // 职工 ID，外键
+  job_id      Int       @db.Integer // 岗位 ID，外键
+  start_date  DateTime  @db.Date // 进入岗位的日期
+  end_date    DateTime? @db.Date // 离开岗位的日期（为空表示在职）
+  created_at  DateTime  @default(now()) // 记录创建时间
+  updated_at  DateTime  @updatedAt // 记录更新时间
+
+  employee Employee @relation(fields: [employee_id], references: [employee_id]) // 关联职工信息表
+  job      JobList  @relation(fields: [job_id], references: [job_id]) // 关联岗位表
+}
+
+// 岗位表：记录岗位的基本信息，包括薪资
+model JobList {
+  job_id            Int                 @id @default(autoincrement()) // 岗位 ID，主键
+  job_title         String              @db.VarChar(100) // 岗位名称
+  job_description   String?             @db.Text // 岗位描述
+  salary            Float               @db.DoublePrecision // 岗位薪资（原 Decimal 替换为 Float）
+  created_at        DateTime            @default(now()) // 记录创建时间
+  updated_at        DateTime            @updatedAt // 记录更新时间
+  EmployeePositions EmployeePositions[] // 关联职工岗位表
+}
+
+// 新闻表：存储新闻的基本信息，包括标题、内容和状态
+model News {
+  id           Int       @id @default(autoincrement()) // 新闻 ID，主键
+  title        String    @db.VarChar(255) // 新闻标题
+  content      String    @db.Text // 新闻内容
+  category_id  Int       @db.Integer // 新闻分类 ID，外键
+  status       String    @db.VarChar(50) // 新闻状态（如草稿、已发布）
+  created_at   DateTime  @default(now()) // 创建时间
+  updated_at   DateTime  @updatedAt // 更新时间
+  published_at DateTime? // 发布时间
+  usr_id       Int       @db.Integer // 发布者用户 ID
+
+  category NewsCategories @relation(fields: [category_id], references: [id]) // 关联新闻分类表
+  reviews  NewsReviews[] // 关联新闻审核表
+}
+
+// 新闻分类表：存储新闻分类信息
+model NewsCategories {
+  id         Int      @id @default(autoincrement()) // 分类 ID，主键
+  name       String   @db.VarChar(100) // 分类名称
+  created_at DateTime @default(now()) // 创建时间
+  updated_at DateTime @updatedAt // 更新时间
+  News       News[] // 关联新闻表
+}
+
+// 新闻审核表：存储新闻审核记录
+model NewsReviews {
+  id          Int      @id @default(autoincrement()) // 审核记录 ID，主键
+  news_id     Int      @db.Integer // 新闻 ID，外键
+  reviewer_id Int      @db.Integer // 审核员用户 ID
+  status      String   @db.VarChar(50) // 审核状态（如通过、拒绝）
+  comment     String?  @db.Text // 审核意见
+  created_at  DateTime @default(now()) // 创建时间
+  updated_at  DateTime @updatedAt // 更新时间
+
+  news News @relation(fields: [news_id], references: [id]) // 关联新闻表
+}
+
+// 票价表：存储不同线路、不同时间段、不同乘客类型的票价信息
+model Fare {
+  fare_id     Int       @id @default(autoincrement()) // 票价 ID，主键
+  route_id    Int       @db.Integer // 路线 ID，外键
+  fare_type   String    @db.VarChar(50) // 票价类型（如普通票价、学生票）
+  price       Float     @db.DoublePrecision // 票价金额（原 Decimal 替换为 Float）
+  start_date  DateTime? // 适用开始日期
+  end_date    DateTime? // 适用结束日期
+  description String?   @db.Text // 票价描述
+
+  route Route @relation(fields: [route_id], references: [route_id]) // 关联路线表
+}
+
+// 账单表：存储各类账单信息，如车费、维修费等
+model Bills {
+  bill_id            Int                  @id @default(autoincrement()) // 账单 ID，主键
+  bill_type          String               @db.VarChar(50) // 账单类型（如车费、维修费）
+  amount             Float                @db.DoublePrecision // 账单金额（原 Decimal 替换为 Float）
+  created_at         DateTime             @default(now()) // 创建时间
+  description        String?              @db.Text // 账单描述
+  FareBills          FareBills[] // 关联车费账单表
+  StationMaintenance StationMaintenance[] // 关联车站维护记录表
+}
+
+// 车费账单表：记录车费账单的详细信息
+model FareBills {
+  fare_bill_id Int    @id @default(autoincrement()) // 车费账单 ID，主键
+  bill_id      Int    @db.Integer // 账单 ID，外键
+  vehicle_id   Int    @db.Integer // 公交车 ID，外键
+  fare_type    String @db.VarChar(50) // 票价类型（如普通票价、学生票）
+  route_id     Int    @db.Integer // 路线 ID，外键
+
+  bill    Bills   @relation(fields: [bill_id], references: [bill_id]) // 关联账单表
+  vehicle Vehicle @relation(fields: [vehicle_id], references: [vehicle_id]) // 关联车辆表
+  route   Route   @relation(fields: [route_id], references: [route_id]) // 关联路线表
+}
+
+// 安全监控表：记录安全监控信息
+model SafetySurveillance {
+  record_id      Int      @id @default(autoincrement()) // 记录 ID，主键
+  timestamp      DateTime @db.Timestamp // 监控时间
+  report_content String   @db.Text // 监控内容
+  facility_id    Int      @db.Integer // 设施 ID，外键
+
+  facility Facilitie @relation(fields: [facility_id], references: [facility_id]) // 关联设施实例表
+}
+
+// 车站维护记录表：记录车站维护信息
+model StationMaintenance {
+  maintenance_id   Int      @id @default(autoincrement()) // 维护记录 ID，主键
+  station_id       Int      @db.Integer // 车站 ID，外键
+  maintenance_date DateTime @db.Date // 维护日期
+  request_id       Int      @db.Integer // 维护申请 ID，外键
+  description      String   @db.Text // 维护描述
+  bill_id          Int?     @db.Integer // 账单 ID，外键（可选）
+  staff_id         Int      @db.Integer // 职员 ID，外键
+
+  station Station            @relation(fields: [station_id], references: [station_id]) // 关联车站表
+  request MaintenanceRequest @relation(fields: [request_id], references: [request_id]) // 关联维护申请表
+  bill    Bills?             @relation(fields: [bill_id], references: [bill_id]) // 关联账单表
+  staff   Employee           @relation(fields: [staff_id], references: [employee_id]) // 关联职工表
+}
+
+// 设施维护记录表：记录设施维护信息
+model FacilityMaintenance {
+  maintenance_id Int      @id @default(autoincrement()) // 维护记录 ID，主键
+  facility_id    Int      @db.Integer // 设施 ID，外键
+  request_id     Int      @db.Integer // 维护申请 ID，外键
+  staff_id       Int      @db.Integer // 职员 ID，外键
+  description    String   @db.Text // 维护描述
+  start_date     DateTime @db.Date // 维护开始日期
+  end_date       DateTime @db.Date // 维护结束日期
+
+  facility Facilitie          @relation(fields: [facility_id], references: [facility_id]) // 关联设施实例表
+  request  MaintenanceRequest @relation(fields: [request_id], references: [request_id]) // 关联维护申请表
+  staff    Employee           @relation(fields: [staff_id], references: [employee_id]) // 关联职工表
+}
+
+// 设施实例表：记录设施的具体实例信息
+model Facilitie {
+  facility_id      Int     @id @default(autoincrement()) // 设施 ID，主键
+  facility_type_id Int     @db.Integer // 设施类型 ID，外键
+  description      String? @db.Text // 设施描述
+  location         String  @db.VarChar(255) // 设施位置
+  owner_id         String? @db.VarChar(50) // 所属 ID（如车站 ID 或车辆 ID）
+
+  facilityType        FacilityTypes         @relation(fields: [facility_type_id], references: [type_id]) // 关联设施类型表
+  SafetySurveillance  SafetySurveillance[] // 关联安全监控表
+  FacilityMaintenance FacilityMaintenance[] // 关联设施维护记录表
+  FacilityAssignments FacilityAssignments[] // 关联设施发放记录表
+}
+
+// 设施类型表：记录设施类型的基本信息
+model FacilityTypes {
+  type_id          Int                @id @default(autoincrement()) // 类型 ID，主键
+  type_name        String             @db.VarChar(100) // 类型名称
+  type_description String?            @db.Text // 类型描述
+  image_url        String?            @db.Text // 设施图片 URL
+  price            Float              @db.DoublePrecision // 设施价格（原 Decimal 替换为 Float）
+  Facilitie        Facilitie[] // 关联设施实例表
+  FacilityRequests FacilityRequests[] // 关联设施申请记录表
+}
+
+// 设施申请记录表：记录设施申请信息
+model FacilityRequests {
+  request_id       Int      @id @default(autoincrement()) // 申请单 ID，主键
+  request_date     DateTime @db.Date // 申请日期
+  facility_type_id Int      @db.Integer // 设施类型 ID，外键
+  request_reason   String   @db.Text // 申请理由
+  owner_type       String   @db.VarChar(50) // 设施归属类型（如车站、公交车）
+  owner_id         String   @db.VarChar(50) // 设施归属 ID（如车站 ID 或公交车 ID）
+  approval_status  String   @db.VarChar(20) // 审批状态（如审批中、通过）
+
+  facilityType        FacilityTypes         @relation(fields: [facility_type_id], references: [type_id]) // 关联设施类型表
+  FacilityAssignments FacilityAssignments[] // 关联设施发放记录表
+}
+
+// 设施发放记录表：记录设施发放信息
+model FacilityAssignments {
+  assignment_id   Int      @id @default(autoincrement()) // 发放记录 ID，主键
+  request_id      Int      @db.Integer // 申请单 ID，外键
+  facility_id     Int      @db.Integer // 设施 ID，外键
+  assignment_date DateTime @db.Date // 发放日期
+
+  request  FacilityRequests @relation(fields: [request_id], references: [request_id]) // 关联设施申请记录表
+  facility Facilitie        @relation(fields: [facility_id], references: [facility_id]) // 关联设施实例表
 }
