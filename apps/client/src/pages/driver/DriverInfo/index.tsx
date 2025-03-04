@@ -8,8 +8,10 @@ import {
 import { Button, Descriptions, Result, Input, Space, Table, Tag } from 'antd';
 import type { TableProps } from 'antd';
 
-import { FormProvider, Field } from '@formily/react';
+// import { FormProvider, Field } from '@formily/react';
 import { useRequest } from 'ahooks';
+import DriverTable from './DriverTable';
+import CreateDriver from './CreateDriver';
 // import SearchForm from './SearchForm';
 
 interface DataType {
@@ -157,9 +159,9 @@ function DriverInfo() {
           </Button>,
         ]}
       >
-
-        <Table<DataType> columns={columns} dataSource={data} />;
-
+        <CreateDriver title='a' triggerButtonText='a' />
+        {/* <Table<DataType> columns={columns} dataSource={data} />; */}
+        <DriverTable />
       </PageContainer>
 
     </div>
