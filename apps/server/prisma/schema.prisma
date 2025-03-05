@@ -88,20 +88,22 @@ model ExtraSchedule {
 
 // 职工基本信息表：存储职工的基本信息
 model Employee {
-  employee_id         Int                   @id @default(autoincrement()) // 职工ID
-  name                String                @db.VarChar(100) // 姓名
-  birth_date          DateTime // 出生日期
-  gender              String                @db.VarChar(10) // 性别
-  address             String                @db.VarChar(100) // 地址
-  phone_number        String                @db.VarChar(15) // 联系电话
-  id_type             String                @db.VarChar(50) // 身份证件类型
-  id_number           String                @db.VarChar(50) // 身份证件号
-  driverInfo          DriverInfo? // 关联司机信息表
-  created_at          DateTime              @default(now())
-  updated_at          DateTime              @updatedAt
-  EmployeePositions   EmployeePositions[]
-  StationMaintenance  StationMaintenance[]
-  FacilityMaintenance FacilityMaintenance[]
+  employee_id            Int                      @id @default(autoincrement()) // 职工ID
+  name                   String                   @db.VarChar(100) // 姓名
+  birth_date             DateTime // 出生日期
+  gender                 String                   @db.VarChar(10) // 性别
+  address                String                   @db.VarChar(100) // 地址
+  phone_number           String                   @db.VarChar(15) // 联系电话
+  id_type                String                   @db.VarChar(50) // 身份证件类型
+  id_number              String                   @db.VarChar(50) // 身份证件号
+  driverInfo             DriverInfo? // 关联司机信息表
+  created_at             DateTime                 @default(now())
+  updated_at             DateTime                 @updatedAt
+  EmployeePositions      EmployeePositions[]
+  StationMaintenance     StationMaintenance[]
+  FacilityMaintenance    FacilityMaintenance[]
+  Attendance             Attendance[]
+  PerformanceEvaluations PerformanceEvaluations[]
 }
 
 // 乘客反馈表：记录乘客的反馈信息
@@ -428,4 +430,32 @@ model FacilityAssignments {
 
   request  FacilityRequests @relation(fields: [request_id], references: [request_id]) // 关联设施申请记录表
   facility Facilitie        @relation(fields: [facility_id], references: [facility_id]) // 关联设施实例表
+}
+
+// 员工考勤表：记录员工的考勤信息，包括签到和签退时间
+model Attendance {
+  attendance_id Int       @id @default(autoincrement()) // 考勤记录 ID，主键
+  employee_id   Int       @db.Integer // 职工 ID，外键
+  date          DateTime  @db.Date // 考勤日期
+  sign_in_time  DateTime? @db.Time // 签到时间
+  sign_out_time DateTime? @db.Time // 签退时间
+  status        String    @db.VarChar(20) // 考勤状态（如正常、迟到、早退、缺勤）
+  created_at    DateTime  @default(now()) // 记录创建时间
+  updated_at    DateTime  @updatedAt // 记录更新时间
+
+  employee Employee @relation(fields: [employee_id], references: [employee_id])
+  // 关联职工基本信息表
+}
+
+// 绩效评估表：记录员工的绩效评估信息
+model PerformanceEvaluations {
+  evaluation_id   Int      @id @default(autoincrement()) // 绩效评估 ID，主键
+  employee_id     Int      @db.Integer // 职工 ID，外键
+  evaluation_date DateTime @db.Date // 评估日期
+  metrics         Json     @db.Json // 评估指标（JSON 格式）
+  total_score     Float    @db.DoublePrecision // 总评分
+  created_at      DateTime @default(now()) // 记录创建时间
+  updated_at      DateTime @updatedAt // 记录更新时间
+
+  employee Employee @relation(fields: [employee_id], references: [employee_id]) // 关联职工基本信息表
 }
