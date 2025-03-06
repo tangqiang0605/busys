@@ -1,17 +1,42 @@
-### Create a new user (POST)
-POST http://localhost:3000/user
+### try login
+POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-  "password_hash": "hashed_password_123",
-  "role_id": ["role1", "role2"],
+  "id":"123456",
+  "password":"1234"
+}
+
+### Create a new user (POST)
+POST http://localhost:3000/user/create_user
+Content-Type: application/json
+
+{
+  "password_hash": "1234",
+  "role_id":2,
+  "user_id":123456,
   "is_active": true,
   "metadata": {
-    "driver_id": "driver_001"
+    "driver_id": ""
   }
 }
 
-### Get all users (GET)
+### Create a new role
+POST http://localhost:3000/user/create_role
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MTI1Mzc4NSwiZXhwIjoxNzQxMzQwMTg1fQ.uOZW4Z8lmi8lfR8UGRjc0yTcGfFDmBu5JL7GlF9q3ZU
+
+{
+  "role_name":"普通用户",
+  "allowed_routes":[],
+  "allowed_actions":[]
+}
+
+### Read roles
+POST http://localhost:3000/user/read_role
+
+
+## Get all users (GET)
 GET http://localhost:3000/user
 
 ### Get user by ID (GET)

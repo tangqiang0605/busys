@@ -12,6 +12,7 @@ generator client {
 // 用户表：存储用户的基本信息和权限
 model User {
   user_id       Int      @id @default(autoincrement()) // 用户唯一标识
+  username      String   @default("default_username") // 设置默认值
   password_hash String   @db.VarChar(255) // 用户密码哈希
   is_active     Boolean  @default(true) // 账号是否可用
   metadata      Json     @db.Json // 其他元信息（如司机账号绑定司机ID）
