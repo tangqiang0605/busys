@@ -7,7 +7,6 @@ import {
 
 export default {
   route: {
-
     path: '/',
     routes: [
       {

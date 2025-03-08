@@ -9,6 +9,8 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtMiddleware } from './middleware/jwt.middleware';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from './middleware/transformInterceptor';
+import { DriverModule } from './driver/driver.module';
+import { CacheBusterInterceptor } from './middleware/cache-buster.interceptor';
 // TODO app可以收到一个文件夹里面
 @Module({
   imports: [
@@ -18,12 +20,13 @@ import { TransformInterceptor } from './middleware/transformInterceptor';
       signOptions: { expiresIn: '1d' }, // access_token有效期
     }),
     PrismaModule,
-    UserModule],
+    UserModule,
+    DriverModule],
   controllers: [AppController],
   providers: [AppService, Logger, {
     provide: APP_INTERCEPTOR,
     useClass: TransformInterceptor
-  }],
+  }, CacheBusterInterceptor],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

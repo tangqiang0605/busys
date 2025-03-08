@@ -23,7 +23,7 @@ export class JwtMiddleware implements NestMiddleware {
       req['user'] = payload; // 将解码后的用户信息附加到请求对象上
       next();
     } catch (err) {
-      return res.status(401).json({ message: 'Unauthorized' });
+      throw new HttpException('jwt检验不通过，可以是过期了', HttpStatus.UNAUTHORIZED)
     }
   }
 }

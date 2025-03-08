@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, Logger } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, Logger, Header, Request } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Prisma } from '@prisma/client';
 import { hashPassword } from './utils';
@@ -69,6 +69,16 @@ export class UserController {
     } catch (error) {
       throw new HttpException(error.message, error.status || HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+
+  @Get('getinfo')
+  async readUserInfoByToken(@Request() req) {
+    this.logger.debug(req)
+    const user_id = req['user'].user_id;
+    const user = await this.userService.readUserWithRoleById({ user_id })
+    user.password_hash = undefined;
+    this.logger.debug(user)
+    return user;
   }
 
   // @Get()

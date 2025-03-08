@@ -10,8 +10,8 @@ import type { TableProps } from 'antd';
 
 // import { FormProvider, Field } from '@formily/react';
 import { useRequest } from 'ahooks';
-import DriverTable from './DriverTable';
-import CreateDriver from './CreateDriver';
+import DriverTable from './DriverInfoTable';
+import { CreateDriver } from './DriverInfoForm';
 // import SearchForm from './SearchForm';
 
 interface DataType {
@@ -96,22 +96,6 @@ const data: DataType[] = [
 ];
 
 
-
-function MySearch() {
-
-  // const searchText
-
-
-  return (<div>
-
-    {/* <SearchForm /> */}
-    <Input size="small" placeholder="small size" prefix={<SearchOutlined />} />
-
-  </div>)
-}
-
-
-
 /**
  * 管理员看到的
  * @returns 
@@ -136,30 +120,30 @@ function DriverInfo() {
 
       <PageContainer
         content={'查看和管理司机基本信息'}
-        // tabList={[
-        //   {
-        //     tab: '基本信息',
-        //     key: 'base',
-        //   },
-        //   {
-        //     tab: '详细信息',
-        //     key: 'info',
-        //   },
-        // ]}
-        extra={[
-          <MySearch />,
-          <Button key="1" type="primary">
-            新建
-          </Button>,
-        ]}
-        footer={[
-          <Button key="3">重置</Button>,
-          <Button key="2" type="primary">
-            提交
-          </Button>,
-        ]}
+      // tabList={[
+      //   {
+      //     tab: '基本信息',
+      //     key: 'base',
+      //   },
+      //   {
+      //     tab: '详细信息',
+      //     key: 'info',
+      //   },
+      // ]}
+      // extra={[
+      //   <MySearch />,
+      //   <Button key="1" type="primary">
+      //     新建
+      //   </Button>,
+      // ]}
+      // footer={[
+      //   <Button key="3">重置</Button>,
+      //   <Button key="2" type="primary">
+      //     提交
+      //   </Button>,
+      // ]}
       >
-        <CreateDriver title='a' triggerButtonText='a' />
+        {/* <CreateDriver title='a' triggerButtonText='a' /> */}
         {/* <Table<DataType> columns={columns} dataSource={data} />; */}
         <DriverTable />
       </PageContainer>

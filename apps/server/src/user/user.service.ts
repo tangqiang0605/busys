@@ -115,6 +115,15 @@ export class UserService {
     });
   }
 
+  async readUserWithRoleById(
+    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+  ) {
+    return this.prisma.user.findUnique({
+      where: userWhereUniqueInput,
+      include: { role: true }
+    });
+  }
+
   // async findAll() {
   //   const user = await this.prisma.user.findMany()
   //   console.log(user)

@@ -4,11 +4,15 @@ import './index.css'
 import '@icon-park/react/styles/index.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router'
+import { Provider } from 'react-redux';
+import store from './store/index.ts'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </StrictMode>,
 )
