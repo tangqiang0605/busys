@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { PrismaModule } from './middleware/prisma.module';
+import { NewsModule } from './news/news.module';
+import { NewsCategoriesModule } from './news-categories/news-categories.module';
+import { NewsReviewsModule } from './news-reviews/news-reviews.module';
 
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
@@ -18,7 +21,8 @@ import { TransformInterceptor } from './middleware/transformInterceptor';
       signOptions: { expiresIn: '1d' }, // access_token有效期
     }),
     PrismaModule,
-    UserModule],
+    UserModule,
+    NewsModule, NewsCategoriesModule, NewsReviewsModule],
   controllers: [AppController],
   providers: [AppService, Logger, {
     provide: APP_INTERCEPTOR,
