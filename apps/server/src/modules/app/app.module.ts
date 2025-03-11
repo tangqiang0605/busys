@@ -11,6 +11,9 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from '../../common/interceptors/transformInterceptor';
 import { DriverModule } from '../driver/driver.module';
 import { CacheBusterInterceptor } from '../../common/interceptors/cache-buster.interceptor';
+import { EmployeeModule } from '../employee/employee.module';
+import { RoleModule } from '../role/role.module';
+import { DriverInfoModule } from '../driverInfo/driverInfo.module';
 
 @Module({
   imports: [
@@ -21,7 +24,10 @@ import { CacheBusterInterceptor } from '../../common/interceptors/cache-buster.i
     }),
     PrismaModule,
     UserModule,
-    DriverModule
+    DriverModule,
+    EmployeeModule,
+    RoleModule,
+    DriverInfoModule,
   ],
   controllers: [AppController],
   providers: [
