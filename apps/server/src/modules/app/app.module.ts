@@ -14,6 +14,7 @@ import { CacheBusterInterceptor } from '../../common/interceptors/cache-buster.i
 import { EmployeeModule } from '../employee/employee.module';
 import { RoleModule } from '../role/role.module';
 import { DriverInfoModule } from '../driverInfo/driverInfo.module';
+import { DriverScheduleModule } from '../driverSchedule/driverSchedule.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { DriverInfoModule } from '../driverInfo/driverInfo.module';
     EmployeeModule,
     RoleModule,
     DriverInfoModule,
+    DriverScheduleModule
   ],
   controllers: [AppController],
   providers: [
