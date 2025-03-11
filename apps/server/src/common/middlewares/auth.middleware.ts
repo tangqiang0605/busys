@@ -23,7 +23,8 @@ export class JwtMiddleware implements NestMiddleware {
       req['user'] = payload; // 将解码后的用户信息附加到请求对象上
       next();
     } catch (err) {
-      throw new HttpException('jwt检验不通过，可以是过期了', HttpStatus.UNAUTHORIZED)
+      throw new HttpException('jwt检验不通过，可能是token过期了', HttpStatus.UNAUTHORIZED)
+      // TODO 如果是非法用户，应该给予封禁
     }
   }
 }

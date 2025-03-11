@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from 'src/middleware/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 function buildWhere(restParams: any, operator: 'AND' | 'OR' = 'AND') {
   const conditions = [];

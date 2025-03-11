@@ -13,7 +13,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
       const start = Date.now();
       const result = await next(params);
       const duration = Date.now() - start;
-      console.log(`qihangtang: prisma Query "${params.action}" took ${duration}ms`);
+      console.log(`busys: prisma Query "${params.action}" took ${duration}ms`);
       return result;
     });
 
@@ -23,13 +23,13 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     const start = Date.now();
     await this.$connect();
     const duration = Date.now() - start;
-    console.log(`qihangtang: prisma 连接耗时 Connected to database in ${duration}ms`);
+    console.log(`busys: prisma 连接耗时 Connected to database in ${duration}ms`);
   }
 
   async onModuleDestroy() {
     const start = Date.now();
     await this.$disconnect();
     const duration = Date.now() - start;
-    console.log(`qihangtang: prisma 断开耗时 Disconnected from database in ${duration}ms`);
+    console.log(`busys: prisma 断开耗时 Disconnected from database in ${duration}ms`);
   }
 }

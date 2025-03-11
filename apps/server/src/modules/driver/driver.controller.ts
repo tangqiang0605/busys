@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, UseInterceptors, Param, Delete, Logger, Query, Patch } from '@nestjs/common';
 import { DriverService } from './driver.service';
 import { Prisma } from '@prisma/client';
-import { CacheBusterInterceptor } from '../middleware/cache-buster.interceptor';
+import { createCacheBusterInterceptor } from '../../common/interceptors/cache-buster.interceptor';
 // import { CreateDriverDto } from './dto/create-driver.dto';
 // import { UpdateDriverDto } from './dto/update-driver.dto';
 
@@ -11,7 +11,7 @@ export class DriverController {
 
   // TODO 做分页会不会好一些
   @Get('getAll')
-  @UseInterceptors(CacheBusterInterceptor)
+  @UseInterceptors(createCacheBusterInterceptor(['timestamp', 'timeStamp']))
   async getAllDriverInfo(@Query() params) {
     this.logger.debug(params)
     return this.driverService.findAll(params);

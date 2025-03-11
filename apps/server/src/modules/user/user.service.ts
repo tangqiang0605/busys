@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from '../middleware/prisma.service';
+import { PrismaService } from '../../common/prisma/prisma.service';
 import { User, Prisma, Role } from '@prisma/client';
 import * as CryptoJS from 'crypto-js';
 import { JwtService } from '@nestjs/jwt';

@@ -1,17 +1,17 @@
 import { Logger, MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
-import { PrismaModule } from './middleware/prisma.module';
+import { UserModule } from '../user/user.module';
+import { PrismaModule } from '../../common/prisma/prisma.module';
 
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { JwtMiddleware } from './middleware/jwt.middleware';
+import { JwtMiddleware } from '../../common/middlewares/auth.middleware';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { TransformInterceptor } from './middleware/transformInterceptor';
-import { DriverModule } from './driver/driver.module';
-import { CacheBusterInterceptor } from './middleware/cache-buster.interceptor';
-// TODO app可以收到一个文件夹里面
+import { TransformInterceptor } from '../../common/interceptors/transformInterceptor';
+import { DriverModule } from '../driver/driver.module';
+import { CacheBusterInterceptor } from '../../common/interceptors/cache-buster.interceptor';
+
 @Module({
   imports: [
     PassportModule,
@@ -21,12 +21,18 @@ import { CacheBusterInterceptor } from './middleware/cache-buster.interceptor';
     }),
     PrismaModule,
     UserModule,
-    DriverModule],
+    DriverModule
+  ],
   controllers: [AppController],
-  providers: [AppService, Logger, {
-    provide: APP_INTERCEPTOR,
-    useClass: TransformInterceptor
-  }, CacheBusterInterceptor],
+  providers: [
+    AppService,
+    Logger,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor
+    },
+    // CacheBusterInterceptor
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
