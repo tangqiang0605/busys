@@ -1,8 +1,10 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import driverReducer from './driver'
+import stationReducer from './station'
 const store = configureStore({
   reducer: {
-    driver: driverReducer
+    driver: driverReducer,
+    station: stationReducer,
   }
 });
 

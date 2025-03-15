@@ -1,122 +1,189 @@
 import {
+  CarOutlined,
   ChromeFilled,
   CrownFilled,
+  DollarCircleOutlined,
+  EnvironmentOutlined,
+  FileDoneOutlined,
+  NotificationOutlined,
+  SafetyOutlined,
   SmileFilled,
   TabletFilled,
+  TeamOutlined,
+  UserOutlined,
+  UsergroupAddOutlined,
 } from '@ant-design/icons';
+
+export const routes = [
+  {
+    path: "/driver",
+    name: "司机管理",
+    icon: <UserOutlined />,
+    routes: [
+      {
+        path: "/driver/info",
+        name: "司机信息管理",
+      },
+      {
+        path: "/driver/schedule",
+        name: "司机排班系统",
+      },
+      {
+        path: "/driver/evaluation",
+        name: "司机绩效评估",
+      },
+    ],
+  },
+  {
+    path: "/station",
+    name: "车站管理",
+    icon: <EnvironmentOutlined />,
+    routes: [
+      {
+        path: "/station/info",
+        name: "车站信息管理",
+      },
+      {
+        path: "/station/monitor",
+        name: "车站监控系统",
+      },
+      {
+        path: "/station/maintenance",
+        name: "车站维护管理",
+      },
+    ],
+  },
+  {
+    path: "/vehicle",
+    name: "车辆管理",
+    icon: <CarOutlined />,
+    routes: [
+      {
+        path: "/vehicle/info",
+        name: "车辆信息管理",
+      },
+      {
+        path: "/vehicle/schedule",
+        name: "车辆调度系统",
+      },
+      {
+        path: "/vehicle/maintenance",
+        name: "车辆维护提醒",
+      },
+    ],
+  },
+  {
+    path: "/supply",
+    name: "物件申请",
+    icon: <FileDoneOutlined />,
+    routes: [
+      {
+        path: "/supply/application",
+        name: "物件申请流程",
+      },
+      {
+        path: "/supply/inventory",
+        name: "物件库存管理",
+      },
+    ],
+  },
+  {
+    path: "/passenger",
+    name: "乘客服务",
+    icon: <UsergroupAddOutlined />,
+    routes: [
+      {
+        path: "/passenger/realtime",
+        name: "实时信息查询",
+      },
+      {
+        path: "/passenger/feedback",
+        name: "乘客反馈系统",
+      },
+    ],
+  },
+  {
+    path: "/finance",
+    name: "财务管理",
+    icon: <DollarCircleOutlined />,
+    routes: [
+      {
+        path: "/finance/ticket",
+        name: "票务管理",
+      },
+      {
+        path: "/finance/cost",
+        name: "成本控制",
+      },
+    ],
+  },
+  {
+    path: "/safety",
+    name: "安全管理",
+    icon: <SafetyOutlined />,
+    routes: [
+      {
+        path: "/safety/monitor",
+        name: "安全监控",
+      },
+      {
+        path: "/safety/emergency",
+        name: "应急响应",
+      },
+    ],
+  },
+  {
+    path: "/news",
+    name: "新闻管理",
+    icon: <NotificationOutlined />,
+    routes: [
+      {
+        path: "/news/publish",
+        name: "新闻发布",
+      },
+      {
+        path: "/news/audit",
+        name: "新闻审核",
+      },
+      {
+        path: "/news/category",
+        name: "新闻分类",
+      },
+      {
+        path: "/news/push",
+        name: "新闻推送",
+      },
+    ],
+  },
+  {
+    path: "/staff",
+    name: "职工管理",
+    icon: <TeamOutlined />,
+    routes: [
+      {
+        path: "/staff/info",
+        name: "职工信息管理",
+      },
+      {
+        path: "/staff/attendance",
+        name: "考勤管理",
+      },
+      {
+        path: "/staff/evaluation",
+        name: "绩效评估",
+      },
+      {
+        path: "/staff/training",
+        name: "培训与发展",
+      },
+    ],
+  },
+];
 
 export default {
   route: {
     path: '/',
-    routes: [
-      {
-        path: '/driver/info',
-        name: '司机管理',
-        icon: <SmileFilled />,
-        routes: [
-          {
-            path: '/driver/info',
-            name: "司机基本信息表",
-          },
-          {
-            path: '/driver/schedule',
-            name: '司机排班'
-          },
-          {
-            path: "/driver/evaluation",
-            name: '司机绩效评估'
-          }
-        ]
-      },
-      {
-        path: "/user",
-        name: '用户管理',
-        icon: <SmileFilled />
-      },
-      {
-        path: '/welcome',
-        name: '欢迎',
-        icon: <SmileFilled />,
-        component: './Welcome',
-      },
-      {
-        path: '/admin',
-        name: '管理页',
-        icon: <CrownFilled />,
-        access: 'canAdmin',
-        component: './Admin',
-        routes: [
-          {
-            path: '/admin/sub-page1',
-            name: '一级页面',
-            icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-            component: './Welcome',
-          },
-          {
-            path: '/admin/sub-page2',
-            name: '二级页面',
-            icon: <CrownFilled />,
-            component: './Welcome',
-          },
-          {
-            path: '/admin/sub-page3',
-            name: '三级页面',
-            icon: <CrownFilled />,
-            component: './Welcome',
-          },
-        ],
-      },
-      {
-        name: '列表页',
-        icon: <TabletFilled />,
-        // path: '/list',
-        component: './ListTableList',
-        routes: [
-          {
-            path: '/list/sub-page',
-            name: '列表页面',
-            icon: <CrownFilled />,
-            routes: [
-              {
-                path: 'sub-sub-page1',
-                name: '一一级列表页面',
-                icon: <CrownFilled />,
-                component: './Welcome',
-              },
-              {
-                path: 'sub-sub-page2',
-                name: '一二级列表页面',
-                icon: <CrownFilled />,
-                component: './Welcome',
-              },
-              {
-                path: 'sub-sub-page3',
-                name: '一三级列表页面',
-                icon: <CrownFilled />,
-                component: './Welcome',
-              },
-            ],
-          },
-          {
-            path: '/list/sub-page2',
-            name: '二级列表页面',
-            icon: <CrownFilled />,
-            component: './Welcome',
-          },
-          {
-            path: '/list/sub-page3',
-            name: '三级列表页面',
-            icon: <CrownFilled />,
-            component: './Welcome',
-          },
-        ],
-      },
-      {
-        path: 'https://ant.design',
-        name: 'Ant Design 官网外链',
-        icon: <ChromeFilled />,
-      },
-    ],
+    routes: routes,
   },
   // location: {
   //   pathname: '/',

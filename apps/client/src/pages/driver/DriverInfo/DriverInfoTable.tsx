@@ -20,7 +20,7 @@ import {
 } from '@ant-design/pro-components';
 import { useRequest, useSetState } from 'ahooks';
 import { Button, Popconfirm, PopconfirmProps, Space, message } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { CreateDriver } from './DriverInfoForm';
 import { createDriverApi, deleteDriverApi, getAllDriver } from '../../../apis/driver';
 import { DriverInfoFormData, DriverInfoTableData } from '../../../apis/types';
@@ -29,6 +29,7 @@ import { incremented } from '../../../store/driver';
 import { RootState } from '../../../store';
 import { DriverInfoActions } from './DriverInfoActions';
 import { useNavigate } from 'react-router';
+import { getDataFnFactory } from '../../../utils/factory';
 
 
 
@@ -242,6 +243,9 @@ const DynamicSettings = () => {
     setConfig(state);
   }, 20);
 
+
+  const getData = getDataFnFactory(navigate, getAllDriver)
+  // const getData = useCallback(getDataFnFactory(navigate, getAllDriver), [navigate]);
   return (
     <ProCard
       split="vertical"
@@ -267,35 +271,7 @@ const DynamicSettings = () => {
           }}
           params={{ timestamp: refreshTable }}
           // filter={}
-          request={async (params, sort, filter) => {
-            //  TODO 当列出于筛选或者排序的时候，也应该进行处理
-            // https://ant-design.antgroup.com/components/table-cn#table-demo-head 筛选与排序
-            console.log('', params, sort, filter);
-            const { current, pageSize, ...restParams } = params;
-            console.log(params)
-            const query = {
-              pageNum: current,
-              pageSize,
-              ...restParams
-            }
-            const result = await getAllDriver(query)
-            if (result.statusCode === 401) {
-              navigate('/login')
-              return { data: [] }
-            }
-            const data = result?.data?.data?.map(item => ({ ...item, key: item.driver_id }))
-            console.log('getAllDriver', result)
-
-            return {
-              data: data,
-              // success 请返回 true，
-              // 不然 table 会停止解析数据，即使有数据
-              success: true,
-              // 不传会使用 data 的长度，如果是分页一定要传
-              total: result?.data?.total,
-            };
-
-          }}
+          request={getData}
           options={{
             density: true,
             fullScreen: true,

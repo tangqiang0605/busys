@@ -15,6 +15,8 @@ import { EmployeeModule } from '../employee/employee.module';
 import { RoleModule } from '../role/role.module';
 import { DriverInfoModule } from '../driverInfo/driverInfo.module';
 import { DriverScheduleModule } from '../driverSchedule/driverSchedule.module';
+import { FixedScheduleModule } from '../fixedSchedule/fixedSchedule.module';
+import { StationModule } from '../station/station.module';
 
 @Module({
   imports: [
@@ -29,7 +31,9 @@ import { DriverScheduleModule } from '../driverSchedule/driverSchedule.module';
     EmployeeModule,
     RoleModule,
     DriverInfoModule,
-    DriverScheduleModule
+    DriverScheduleModule,
+    FixedScheduleModule,
+    StationModule
   ],
   controllers: [AppController],
   providers: [
