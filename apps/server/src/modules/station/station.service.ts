@@ -10,8 +10,42 @@ export class StationService {
     return this.prisma.station.create({ data: createStationDto });
   }
 
-  findAll() {
-    return this.prisma.station.findMany()
+  async findAll(params: any) {
+    const { pageNum = 1, pageSize = 10, ...restParams } = params;
+    const skip = (Number(pageNum) - 1) * Number(pageSize);
+    // 构建 where 条件
+
+    const conditions = []
+    for (const [key, value] of Object.entries(restParams)) {
+      if (value !== undefined) {
+        if (key === 'station_id') {
+          // id，精确搜索
+          conditions.push({ [key]: Number(value) })
+          // where['station_id'] = Number(value)
+        } else {
+          // 模糊搜索
+          // where[key] = value;
+          conditions.push({ [key]: { contains: value } })
+        }
+      }
+    }
+    const where = { AND: conditions };
+
+    // 获取分页数据
+    const data = await this.prisma.station.findMany({
+      skip,
+      take: Number(pageSize),
+      where
+    });
+    const total = await this.prisma.station.count({ where });
+
+    // 返回分页结果和总数
+    return {
+      data,
+      total,
+      pageNum,
+      pageSize,
+    };
   }
 
   findOne(id: number) {

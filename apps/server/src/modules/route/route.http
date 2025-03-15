@@ -1,0 +1,9 @@
+
+### 增加路线
+POST http://localhost:3000/route
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjAwNDY4NiwiZXhwIjoxNzQyMDkxMDg2fQ.bEmisQfu-_Z-eoVfbmBFrRmAp5n6AFObkgtpHlv0Y3o
+
+{
+  "route_name":"西2"
+}

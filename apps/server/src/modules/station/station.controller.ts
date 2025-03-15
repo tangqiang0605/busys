@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, Query } from '@nestjs/common';
 import { StationService } from './station.service';
 import { Prisma } from '@prisma/client';
+import { createCacheBusterInterceptor } from '../../common/interceptors/cache-buster.interceptor';
 
 @Controller('station')
 export class StationController {
@@ -12,8 +13,9 @@ export class StationController {
   }
 
   @Get()
-  findAll() {
-    return this.stationService.findAll();
+  @UseInterceptors(createCacheBusterInterceptor(['timestamp', 'timeStamp']))
+  findAll(@Query() query) {
+    return this.stationService.findAll(query);
   }
 
   @Get(':id')

@@ -17,6 +17,8 @@ import { DriverInfoModule } from '../driverInfo/driverInfo.module';
 import { DriverScheduleModule } from '../driverSchedule/driverSchedule.module';
 import { FixedScheduleModule } from '../fixedSchedule/fixedSchedule.module';
 import { StationModule } from '../station/station.module';
+import { RouteModule } from '../route/route.module';
+import { RouteDetailModule } from '../routeDetail/routeDetail.module';
 
 @Module({
   imports: [
@@ -33,7 +35,9 @@ import { StationModule } from '../station/station.module';
     DriverInfoModule,
     DriverScheduleModule,
     FixedScheduleModule,
-    StationModule
+    StationModule,
+    RouteModule,
+    RouteDetailModule
   ],
   controllers: [AppController],
   providers: [

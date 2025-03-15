@@ -1,0 +1,27 @@
+
+### 修改路线顺序
+PATCH http://localhost:3000/routeDetail
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjAwNDY4NiwiZXhwIjoxNzQyMDkxMDg2fQ.bEmisQfu-_Z-eoVfbmBFrRmAp5n6AFObkgtpHlv0Y3o
+
+[{
+  "detail_id":8,
+  "station_order":1
+},{"detail_id":10,"station_order":2}]
+
+### 增加路线
+POST http://localhost:3000/routeDetail
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjAwNDY4NiwiZXhwIjoxNzQyMDkxMDg2fQ.bEmisQfu-_Z-eoVfbmBFrRmAp5n6AFObkgtpHlv0Y3o
+
+{
+  "route_id":4,
+  "station_id":2,
+  "station_order":1
+}
+
+### 查找路线
+GET http://localhost:3000/routeDetail?route_id=4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjAwNDY4NiwiZXhwIjoxNzQyMDkxMDg2fQ.bEmisQfu-_Z-eoVfbmBFrRmAp5n6AFObkgtpHlv0Y3o
+

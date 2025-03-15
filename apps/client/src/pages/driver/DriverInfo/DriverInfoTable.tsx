@@ -31,8 +31,6 @@ import { DriverInfoActions } from './DriverInfoActions';
 import { useNavigate } from 'react-router';
 import { getDataFnFactory } from '../../../utils/factory';
 
-
-
 export const driverInfoColumns: ProColumnType<DriverInfoTableData>[] = [
   {
     title: '司机id',
@@ -203,29 +201,8 @@ const DynamicSettings = () => {
   const [config, setConfig] = useState<any>(initConfig);
 
   const refreshTable = useSelector((state: RootState) => state.driver.refreshTable);
-  // const { data, error, loading } = useRequest(getUsername);
-
-  const [data, setData] = useState<DriverInfoTableData[]>()
-
-
   const [selections, setSelections] = useState<number[]>()
 
-  useEffect(() => {
-    console.log(selections)
-  }, [selections])
-  useEffect(() => {
-    // initData()
-  }, [])
-
-
-
-
-  // const initData = async () => {
-  //   const result = await getAllDriver()
-  //   console.log(result)
-  //   setData(result.data)
-  //   // setData(result.data.map((item: DataType) => ({ ...item.employee, ...item.driverInfo })))
-  // }
   const navigate = useNavigate();
   const onSubmit = async (values: DriverInfoFormData) => {
     console.log(values)
@@ -237,12 +214,6 @@ const DynamicSettings = () => {
       console.log('创建司机失败', result)
     }
   }
-
-  /** 去抖配置 */
-  const updateConfig = useDebounceFn(async (state) => {
-    setConfig(state);
-  }, 20);
-
 
   const getData = getDataFnFactory(navigate, getAllDriver)
   // const getData = useCallback(getDataFnFactory(navigate, getAllDriver), [navigate]);

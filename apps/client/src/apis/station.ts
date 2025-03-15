@@ -1,5 +1,5 @@
 import { accessTokenKey } from "./user";
-
+import { Response } from "./types";
 export interface Station {
   station_id: number,
   station_name: string,
@@ -8,10 +8,10 @@ export interface Station {
   updated_at?: string,
 }
 
-// TODO 支持参数
 export async function getAllStation(params: any) {
+  const searchParams = new URLSearchParams(params);
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
-  const result = await fetch(`/api/station`, {
+  const result = await fetch(`/api/station?${searchParams.toString()}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -19,14 +19,7 @@ export async function getAllStation(params: any) {
     }
   })
 
-  const response = await result.json()
-
-  response.data = {
-    data: response.data,
-    total: 4,
-    pageNum: 1,
-    pageSize: 4,
-  }
+  const response = await result.json() as Response<{ total: number, pageNum: number, pageSize: number, data: Array<Station> }>
   return response
 }
 
