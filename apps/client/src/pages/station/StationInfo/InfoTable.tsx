@@ -11,7 +11,7 @@ import { Button, message } from 'antd';
 import { incremented } from '../../../store/driver';
 import { CreateForm } from '../../../components/CreateForm';
 
-export default () => {
+export default function InfoTable() {
   const refreshTable = useSelector((state: RootState) => state.station.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();

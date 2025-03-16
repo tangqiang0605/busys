@@ -2,33 +2,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  AlipayOutlined,
   LockOutlined,
-  MobileOutlined,
-  TaobaoOutlined,
   UserOutlined,
-  WeiboOutlined,
 } from '@ant-design/icons';
 import {
   LoginFormPage,
   ProConfigProvider,
-  ProFormCaptcha,
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
 import { theme } from 'antd';
-import type { CSSProperties } from 'react';
-import { useState } from 'react';
-import { loginApi, readRolesApi, tryLoginApi } from '../apis/user';
-
-type LoginType = 'phone' | 'account';
-
-const iconStyles: CSSProperties = {
-  color: 'rgba(0, 0, 0, 0.2)',
-  fontSize: '18px',
-  verticalAlign: 'middle',
-  cursor: 'pointer',
-};
+import { tryLoginApi } from '../apis/user';
 
 interface LoginForm {
   "username": string,
@@ -36,7 +20,7 @@ interface LoginForm {
 }
 
 const Page = () => {
-  const [loginType, setLoginType] = useState<LoginType>('account');
+  // const [loginType, setLoginType] = useState<LoginType>('account');
   const { token } = theme.useToken();
   const navigate = useNavigate();
   const tryLogin = async (values: LoginForm) => {
@@ -135,7 +119,7 @@ const Page = () => {
   );
 };
 
-export default () => {
+export default function LoginPage() {
   return (
     <ProConfigProvider dark>
       <Page />

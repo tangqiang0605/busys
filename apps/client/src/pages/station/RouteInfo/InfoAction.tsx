@@ -6,7 +6,7 @@ import { RouteInfoForm } from './constants';
 import { Route, deleteRouteApi, updateRouteApi } from '../../../apis/route';
 import DetailModal from './DetailModal';
 
-export default (props: { record: Route }) => {
+export default function InfoAction(props: { record: Route }) {
   const dispatch = useDispatch();
   const [messageTool, contextHolder] = message.useMessage();
 
@@ -28,7 +28,7 @@ export default (props: { record: Route }) => {
 
   const onConfirm = async () => {
     const id = String(props.record.route_id)
-    const result = await deleteRouteApi(id);
+    await deleteRouteApi(id);
     // TODO djr 异常处理
     dispatch(
       incremented({

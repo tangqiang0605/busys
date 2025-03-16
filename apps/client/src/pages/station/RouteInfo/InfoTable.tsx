@@ -11,7 +11,7 @@ import { incremented } from '../../../store/route';
 import { CreateForm } from '../../../components/CreateForm';
 import { Route, createRouteApi, getAllRouteApi } from '../../../apis/route';
 
-export default () => {
+export default function InfoTable() {
   const refreshTable = useSelector((state: RootState) => state.route.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();

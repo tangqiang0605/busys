@@ -10,10 +10,9 @@ import { Button, message } from 'antd';
 import { CreateForm } from '../../../components/CreateForm';
 import { RouteSchedule, createRouteScheduleApi, getAllRouteScheduleApi } from '../../../apis/route/routeSchedule';
 import { hms2iso, iso2hhmm } from '../../../utils/time';
+import { incremented } from '../../../store/route';
 
-
-
-export default () => {
+export default function InfoTable() {
   const refreshTable = useSelector((state: RootState) => state.route.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
@@ -21,19 +20,22 @@ export default () => {
 
   const dispatch = useDispatch();
   const onSubmit = async (values: RouteSchedule) => {
-    console.log(values)
-    // const result = await createRouteScheduleApi(values)
-    // if (result?.data) {
-    //   message.success('创建成功')
-    //   dispatch(
-    //     incremented({
-    //       unit: 1
-    //     })
-    //   );
-    // } else {
-    //   message.error('创建失败')
-    //   console.log('创建失败', result)
-    // }
+    const result = await createRouteScheduleApi({
+      ...values,
+      start_time: hms2iso(values.start_time),
+      end_time: hms2iso(values.end_time)
+    })
+    if (result?.data) {
+      message.success('创建成功')
+      dispatch(
+        incremented({
+          unit: 1
+        })
+      );
+    } else {
+      message.error('创建失败')
+      console.log('创建失败', result)
+    }
   }
   return (
     <ProCard

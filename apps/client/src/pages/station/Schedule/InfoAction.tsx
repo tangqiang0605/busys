@@ -6,7 +6,7 @@ import { RouteScheduleForm } from './constants';
 import { RouteSchedule, deleteRouteScheduleApi, updateRouteScheduleApi } from '../../../apis/route/routeSchedule';
 import { hms2iso } from '../../../utils/time';
 
-export default (props: { record: RouteSchedule }) => {
+export default function InfoAction(props: { record: RouteSchedule }) {
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -34,7 +34,8 @@ export default (props: { record: RouteSchedule }) => {
 
   const onConfirm = async () => {
     const id = String(props.record.schedule_id)
-    const result = await deleteRouteScheduleApi(id);
+    await deleteRouteScheduleApi(id);
+    // TODO 请求结果异常处理
     dispatch(
       incremented({
         unit: 1

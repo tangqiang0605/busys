@@ -1,16 +1,14 @@
-import { LikeOutlined, UserOutlined } from '@ant-design/icons';
 import type { ProSettings } from '@ant-design/pro-components';
 import { BusOne } from '@icon-park/react'
 import {
-  PageContainer,
   ProBreadcrumb,
   ProLayout,
   SettingDrawer,
 } from '@ant-design/pro-components';
-import { Button, Descriptions, Result, Space, Statistic } from 'antd';
+import { Button, Result } from 'antd';
 import { useEffect, useState } from 'react';
 import defaultProps from './_defaultProps';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router';
+import { Link, Outlet, useNavigate } from 'react-router';
 
 import { useLocalStorageState } from 'ahooks';
 import { accessTokenKey, getUserInfoApi } from '../../apis/user';
@@ -18,11 +16,11 @@ import TokenInfo from './TokenInfo';
 
 
 
-export default () => {
+export default function Dashboard() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
     fixSiderbar: true,
   });
-  const [accessToken, setAccessToken] = useLocalStorageState<string>(accessTokenKey)
+  const [accessToken] = useLocalStorageState<string>(accessTokenKey)
 
 
   const navigate = useNavigate()

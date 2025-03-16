@@ -5,7 +5,7 @@ import { CreateForm } from '../../../components/CreateForm';
 import { Station, deleteStationApi, updateStationApi } from '../../../apis/station';
 import { StationInfoForm } from './constants';
 
-export default (props: { record: Station }) => {
+export default function InfoAction(props: { record: Station }) {
   const dispatch = useDispatch();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -27,7 +27,8 @@ export default (props: { record: Station }) => {
 
   const onConfirm = async () => {
     const id = String(props.record.station_id)
-    const result = await deleteStationApi(id);
+    await deleteStationApi(id);
+    // TODO 请求结果异常处理
     dispatch(
       incremented({
         unit: 1

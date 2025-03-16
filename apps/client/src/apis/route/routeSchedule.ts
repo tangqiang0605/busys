@@ -25,7 +25,7 @@ export async function getAllRouteScheduleApi(params: any) {
   return response
 }
 
-export async function createRouteScheduleApi(params: any) {
+export async function createRouteScheduleApi(params: Partial<RouteSchedule>) {
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
 
   const result = await fetch('/api/routeSchedule', {

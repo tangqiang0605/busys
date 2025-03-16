@@ -3,9 +3,7 @@ import { DragSortTable } from '@ant-design/pro-components';
 import { Button, Modal, message } from 'antd';
 import { useEffect, useState } from 'react';
 import DetailAction from './DetailAction';
-import { useRequest } from 'ahooks';
-import { Route, RouteDetail, createRouteApi, createRouteDetailApi, getRouteDetailByRouteId, updateRouteOrders } from '../../../apis/route';
-import { getDataFnFactory } from '../../../utils/factory';
+import { Route, RouteDetail, createRouteDetailApi, getRouteDetailByRouteId, updateRouteOrders } from '../../../apis/route';
 import { CreateForm } from '../../../components/CreateForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
@@ -97,7 +95,7 @@ const columns: ProColumns[] = [
 
 
 
-export default (props: { route: Route }) => {
+export default function DetailModal(props: { route: Route }) {
   // 表格数据
   const [data, setData] = useState<RouteDetail[]>([])
   // const getData = getDataFnFactory(navigator, getRouteDetailByRouteId)
