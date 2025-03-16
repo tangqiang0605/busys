@@ -12,7 +12,7 @@ import { useRequest, useSetState } from 'ahooks';
 import { Button, Popconfirm, PopconfirmProps, Space, message } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { CreateDriver } from './DriverInfoForm';
-import { createDriverApi, deleteDriverApi, getAllDriver } from '../../../apis/driver';
+import { createDriverApi, deleteDriverApi, getAllDriverApi } from '../../../apis/driver';
 import { DriverInfoFormData, DriverInfoTableData } from '../../../apis/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { incremented } from '../../../store/driver';
@@ -167,7 +167,7 @@ const DynamicSettings = () => {
               pageSize,
               ...restParams
             }
-            const result = await getAllDriver(query)
+            const result = await getAllDriverApi(query)
             if (result.statusCode === 401) {
               navigate('/login')
               return { data: [] }

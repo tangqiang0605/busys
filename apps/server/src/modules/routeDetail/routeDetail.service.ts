@@ -3,7 +3,7 @@ import { PrismaService } from 'src/common/prisma/prisma.service';
 import { Prisma, RouteDetail } from '@prisma/client';
 import { StationService } from '../station/station.service';
 import { RouteService } from '../route/route.service';
-import { buildWhere } from '../../common/utils';
+import { buildPageQuery, buildWhere } from '../../common/utils';
 
 @Injectable()
 export class RouteDetailService {
@@ -33,7 +33,7 @@ export class RouteDetailService {
       throw new Error(`路线 ID ${createRouteDetailDto.route_id} 不存在`);
     }
 
-    // TODO djr station_order 不能和已有的顺序重叠
+    // TODO djr station_order 不能和已有的顺序staion_orders重复，在最大station_order+1
 
     const { station_id, route_id, ...remainingData } = createRouteDetailDto;
 
@@ -59,25 +59,11 @@ export class RouteDetailService {
   }
 
   async findAll(params: any) {
-    const { pageNum = 1, pageSize = 10, ...restParams } = params;
-    const skip = (Number(pageNum) - 1) * Number(pageSize);
-
-    const conditions = []
-    for (const [key, value] of Object.entries(restParams)) {
-      if (value !== undefined) {
-        if (['route_id', 'detail_id'].includes(key)) {
-          conditions.push({ [key]: Number(value) })
-          // where['route_id'] = Number(value)
-        } else {
-          conditions.push({ [key]: value })
-        }
-      }
-    }
-    const where = { AND: conditions };
+    const { skip, take, where, pageNum } = buildPageQuery(params, ['route_id', 'detail_id']);
     // 获取分页数据
     const data = await this.prisma.routeDetail.findMany({
       skip,
-      take: Number(pageSize),
+      take,
       where,
       include: { route: true }
     });
@@ -88,7 +74,7 @@ export class RouteDetailService {
       data,
       total,
       pageNum,
-      pageSize,
+      pageSize: take,
     };
   }
 
@@ -105,6 +91,7 @@ export class RouteDetailService {
   }
 
   async updateOrders(stationOrders: Array<{ detail_id: number, station_order: number }>) {
+    // TODO djr 不允许有重复station_order 且 station_order > 0
     return await Promise.all(
       stationOrders.map(async (order) => {
         return await this.prisma.routeDetail.update({

@@ -19,6 +19,7 @@ import { FixedScheduleModule } from '../fixedSchedule/fixedSchedule.module';
 import { StationModule } from '../station/station.module';
 import { RouteModule } from '../route/route.module';
 import { RouteDetailModule } from '../routeDetail/routeDetail.module';
+import { RouteScheduleModule } from '../routeSchedule/routeSchedule.module';
 
 @Module({
   imports: [
@@ -37,7 +38,8 @@ import { RouteDetailModule } from '../routeDetail/routeDetail.module';
     FixedScheduleModule,
     StationModule,
     RouteModule,
-    RouteDetailModule
+    RouteDetailModule,
+    RouteScheduleModule
   ],
   controllers: [AppController],
   providers: [

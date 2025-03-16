@@ -48,6 +48,10 @@ export const routes = [
         name: "路线信息管理",
       },
       {
+        path: '/station/schedule',
+        name: '路线排班管理'
+      },
+      {
         path: "/station/monitor",
         name: "车站监控系统",
       },

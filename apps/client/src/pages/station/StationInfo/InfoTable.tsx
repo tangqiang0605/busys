@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { useNavigate } from 'react-router';
 import { getDataFnFactory } from '../../../utils/factory';
-import { Station, createStationApi, getAllStation } from '../../../apis/station';
+import { Station, createStationApi, getAllStationApi } from '../../../apis/station';
 import { StationInfoForm } from './constants';
 import { defaultForm, tableSettings } from './constants';
 import { Button, message } from 'antd';
@@ -15,7 +15,7 @@ export default () => {
   const refreshTable = useSelector((state: RootState) => state.station.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
-  const getData = getDataFnFactory(navigate, getAllStation)
+  const getData = getDataFnFactory<Station[]>(navigate, getAllStationApi)
 
   const dispatch = useDispatch();
   const onSubmit = async (values: Station) => {

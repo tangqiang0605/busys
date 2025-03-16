@@ -1,7 +1,7 @@
 import { Response } from "../apis/types";
 
 // TODO 完善类型注释
-export const getDataFnFactory = (navigate: any, fn: (query: any & { pageNum?: number, pageSize?: number }) => Promise<Response<{ total: number, pageNum: number, pageSize: number, data: any[] }>>) => {
+export const getDataFnFactory = <T>(navigate: any, fn: (query: any & { pageNum?: number, pageSize?: number }) => Promise<Response<{ total: number, pageNum: number, pageSize: number, data: any[] }>>) => {
   return async (params: any & { current: number, pageSize: number }, sort: any, filter: any) => {
     // 请求过程请通过抓包获取
     //  TODO 当列出于筛选或者排序的时候，也应该进行处理
@@ -17,9 +17,10 @@ export const getDataFnFactory = (navigate: any, fn: (query: any & { pageNum?: nu
       navigate('/login')
       return { data: [] }
     }
+    // TODO 把这段转到driver那里
     const data = result?.data?.data?.map(item => ({ ...item, key: item.driver_id }))
     return {
-      data: data,
+      data: data as T,
       // success 请返回 true，
       // 不然 table 会停止解析数据，即使有数据
       success: true,

@@ -9,6 +9,7 @@ import DriverSchedule from './pages/driver/DriverSchedule/index';
 import DriverEvaluation from './pages/driver/DriverEvaluation';
 import StationInfo from './pages/station/StationInfo';
 import RouteInfo from './pages/station/RouteInfo';
+import RouteSchedule from './pages/station/Schedule/index'
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="station">
           <Route path="info" element={<StationInfo />} />
           <Route path='route' element={<RouteInfo />} />
+          <Route path='schedule' element={<RouteSchedule />} />
           {/* <Route path="monitor" element={<StationMonitor />} />
           <Route path="maintenance" element={<StationMaintenance />} /> */}
         </Route>

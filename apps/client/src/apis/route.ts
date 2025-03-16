@@ -72,7 +72,7 @@ export async function getRouteDetailByRouteId(params: { route_id: string }) {
 }
 
 // TODO 支持参数
-export async function getAllRoute(params: any) {
+export async function getAllRouteApi(params: any) {
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
   const result = await fetch(`/api/route`, {
     method: "GET",

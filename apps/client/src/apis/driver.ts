@@ -34,7 +34,7 @@ export async function deleteDriverApi(id: string) {
 
 }
 
-export async function getAllDriver(params: any) {
+export async function getAllDriverApi(params: any) {
 
   const searchParams = new URLSearchParams(params);
 

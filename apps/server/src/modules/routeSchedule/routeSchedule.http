@@ -1,0 +1,12 @@
+
+### 增加班次
+POST http://localhost:3000/routeSchedule
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjA5MTUxMiwiZXhwIjoxNzQyMTc3OTEyfQ.Xuj5kmqO3qDdW2vKXDX8riZzhARojKiBkY1DnSCLzG4
+
+{
+  "route_id":4,
+  "start_time":"1970-01-01T08:30:00Z",
+  "end_time":"1970-01-01T10:30:00Z",
+  "schedule_name":"4路第3班车"
+}

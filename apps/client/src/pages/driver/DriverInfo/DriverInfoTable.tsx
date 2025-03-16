@@ -22,7 +22,7 @@ import { useRequest, useSetState } from 'ahooks';
 import { Button, Popconfirm, PopconfirmProps, Space, message } from 'antd';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { CreateDriver } from './DriverInfoForm';
-import { createDriverApi, deleteDriverApi, getAllDriver } from '../../../apis/driver';
+import { createDriverApi, deleteDriverApi, getAllDriverApi } from '../../../apis/driver';
 import { DriverInfoFormData, DriverInfoTableData } from '../../../apis/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { incremented } from '../../../store/driver';
@@ -215,7 +215,7 @@ const DynamicSettings = () => {
     }
   }
 
-  const getData = getDataFnFactory(navigate, getAllDriver)
+  const getData = getDataFnFactory(navigate, getAllDriverApi)
   // const getData = useCallback(getDataFnFactory(navigate, getAllDriver), [navigate]);
   return (
     <ProCard
