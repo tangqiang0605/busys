@@ -1,11 +1,8 @@
 import { useDispatch } from 'react-redux'
 import { incremented } from '../../../store/route';
 import { Button, Modal, Popconfirm, Space, message } from 'antd';
-import { CreateForm } from '../../../components/CreateForm';
-import { RouteInfoForm } from './constants';
 import { Route, RouteDetail, deleteRouteApi, deleteRouteDetailApi, updateRouteApi } from '../../../apis/route';
 import { useState } from 'react';
-import RouteDetailList from './RouteDetailList';
 
 export default (props: { record: RouteDetail }) => {
   const dispatch = useDispatch();

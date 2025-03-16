@@ -1,11 +1,10 @@
 import { useDispatch } from 'react-redux'
 import { incremented } from '../../../store/route';
-import { Button, Modal, Popconfirm, Space, message } from 'antd';
+import { Button, Popconfirm, Space, message } from 'antd';
 import { CreateForm } from '../../../components/CreateForm';
 import { RouteInfoForm } from './constants';
 import { Route, deleteRouteApi, updateRouteApi } from '../../../apis/route';
-import { useState } from 'react';
-import RouteDetailList from './RouteDetailList';
+import DetailModal from './DetailModal';
 
 export default (props: { record: Route }) => {
   const dispatch = useDispatch();
@@ -30,6 +29,7 @@ export default (props: { record: Route }) => {
   const onConfirm = async () => {
     const id = String(props.record.route_id)
     const result = await deleteRouteApi(id);
+    // TODO djr 异常处理
     dispatch(
       incremented({
         unit: 1
@@ -38,29 +38,12 @@ export default (props: { record: Route }) => {
     messageTool.success('删除成功');
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   return (
     <Space>
       {contextHolder}
 
-      <Button type="link" size='small' onClick={showModal}>
-        查看详情
-      </Button>
-      <Modal title="路线详情" width={1000} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <RouteDetailList route={props.record} />
-      </Modal>
+      <DetailModal route={props.record} />
 
       <CreateForm<Route>
         title="修改信息"

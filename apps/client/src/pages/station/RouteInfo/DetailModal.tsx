@@ -1,6 +1,6 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import { DragSortTable } from '@ant-design/pro-components';
-import { Button, message } from 'antd';
+import { Button, Modal, message } from 'antd';
 import { useEffect, useState } from 'react';
 import DetailAction from './DetailAction';
 import { useRequest } from 'ahooks';
@@ -50,7 +50,6 @@ const columns: ProColumns[] = [
     title: '排序',
     dataIndex: 'sort',
     width: 60,
-    search: false,
     className: 'drag-visible',
   },
   {
@@ -99,47 +98,29 @@ const columns: ProColumns[] = [
 
 
 export default (props: { route: Route }) => {
-  // const [dataSource, setDataSource] = useState(data);
-
+  // 表格数据
+  const [data, setData] = useState<RouteDetail[]>([])
+  // const getData = getDataFnFactory(navigator, getRouteDetailByRouteId)
+  const dispatch = useDispatch();
+  const refreshTable = useSelector((state: RootState) => state.route.refreshTable);
+  useEffect(() => {
+    initData()
+  }, [refreshTable])
+  const initData = async () => {
+    const res = await getRouteDetailByRouteId({ route_id: String(props.route.route_id) });
+    // TODO djr 请求异常处理
+    setData(res.data?.data ?? [])
+  }
   const handleDragSortEnd = async (
     beforeIndex: number,
     afterIndex: number,
     newDataSource: RouteDetail[],
   ) => {
-    console.log('排序后的数据', newDataSource);
-    const result = await updateRouteOrders(newDataSource.map((item, index) => {
-      return {
-        detail_id: Number(item.detail_id),
-        station_order: index
-      }
-    }))
-    // if(result)
-    console.log(result);
-    if (result.statusCode === 200) {
-
-      dispatch(incremented({ unit: 1 }))
-      message.success('修改列表排序成功');
-    } else {
-      message.error('修改顺序失败')
-    }
+    setData(newDataSource.map((item, index) => ({ ...item, station_order: index })));
+    message.success('修改顺序成功');
   };
 
-  const [data, setData] = useState<RouteDetail[]>()
-  useEffect(() => {
-    initData()
-  }, [])
-
-  const initData = async () => {
-    const res = await getRouteDetailByRouteId({ route_id: String(props.route.route_id) });
-    // return;
-    setData(res.data?.data)
-  }
-  const refreshTable = useSelector((state: RootState) => state.route.refreshTable);
-  const dispatch = useDispatch();
-
-
-  const getData = getDataFnFactory(navigator, getRouteDetailByRouteId)
-  // const { data, error, loading } = useRequest(getRouteDetailByRouteId());
+  // 添加车站到路线
   const onSubmit = async (values: RouteDetail) => {
     const result = await createRouteDetailApi(values)
     // TODO 路线增加车站的接口异常处理，比如车站不存在
@@ -156,31 +137,62 @@ export default (props: { route: Route }) => {
     }
     return true;
   }
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => { setIsModalOpen(true) };
+  const handleCancel = () => { setIsModalOpen(false) };
+  const handleOk = async () => {
+    // console.log('排序后的数据', data);
+    const result = await updateRouteOrders(data.map((item, index) => {
+      return {
+        detail_id: Number(item.detail_id),
+        station_order: index
+      }
+    }))
+    if (result.statusCode === 200) {
+      dispatch(incremented({ unit: 1 }))
+      message.success('同步顺序到服务器成功');
+    } else {
+      message.error('同步顺序到服务器失败')
+    }
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
-      <DragSortTable
-        headerTitle={`【${props.route.route_name}】路线详情`}
-        columns={columns}
-        rowKey="detail_id"
-        params={{ timestamp: refreshTable, route_id: props.route.route_id }}
-        search={{ filterType: 'query' }}
-        pagination={false}
-        // dataSource={data}
-        request={getData}
-        dragSortKey="sort"
-        onDragSortEnd={handleDragSortEnd}
-        toolBarRender={() => [
-          <CreateForm<RouteDetail>
-            title="新增"
-            initForm={{ route_id: props.route.route_id, station_id: '2', station_order: 0 }}
-            onSubmit={onSubmit}
-            triggerRender={() => {
-              return <Button type="primary">新增</Button>
-            }} >
-            <RouteDetailForm />
-          </CreateForm>
-        ]}
-      />
+      <Button type="link" size='small' onClick={showModal}>
+        路线详情
+      </Button>
+      <Modal
+        title="路线详情"
+        width={1000}
+        open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <DragSortTable
+          headerTitle={`【${props.route.route_name}】路线详情`}
+          columns={columns}
+          rowKey="detail_id"
+          params={{ timestamp: refreshTable, route_id: props.route.route_id }}
+          // search和request应该一起用？
+          search={false}
+          pagination={false}
+          dataSource={data}
+          // request={getData}
+          dragSortKey="sort"
+          onDragSortEnd={handleDragSortEnd}
+          toolBarRender={() => [
+            <CreateForm<RouteDetail>
+              title="新增"
+              initForm={{ route_id: props.route.route_id, station_id: '2', station_order: 0 }}
+              onSubmit={onSubmit}
+              triggerRender={() => {
+                return <Button type="primary">新增</Button>
+              }} >
+              <RouteDetailForm />
+            </CreateForm>,
+            <Button onClick={() => { dispatch(incremented({ unit: 1 })) }}>刷新</Button>
+          ]}
+        />
+      </Modal>
     </div>
   );
 };
