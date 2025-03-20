@@ -3,17 +3,19 @@ import { PrismaService } from 'src/common/prisma/prisma.service';
 import { Prisma, RouteDetail } from '@prisma/client';
 import { StationService } from '../station/station.service';
 import { RouteService } from '../route/route.service';
-import { buildPageQuery, buildWhere } from '../../common/utils';
+import { buildPageQuery } from '../../common/utils';
 
 @Injectable()
 export class RouteDetailService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly routeService: RouteService,
-    private readonly stationService: StationService
-  ) { }
+    private readonly stationService: StationService,
+  ) {}
 
-  async create(createRouteDetailDto: Prisma.RouteDetailCreateInput & RouteDetail) {
+  async create(
+    createRouteDetailDto: Prisma.RouteDetailCreateInput & RouteDetail,
+  ) {
     const [stationExists, routeExists] = await Promise.all([
       this.prisma.station.findUnique({
         where: { station_id: +createRouteDetailDto.station_id },
@@ -42,30 +44,33 @@ export class RouteDetailService {
       station_order: Number(remainingData.station_order),
       route: {
         connect: {
-          route_id: Number(route_id)
-        }
+          route_id: Number(route_id),
+        },
       },
       station: {
         connect: {
-          station_id: Number(station_id)
-        }
-      }
-    }
+          station_id: Number(station_id),
+        },
+      },
+    };
 
     // 创建 RouteDetail
     return this.prisma.routeDetail.create({
-      data: routeDetailData
+      data: routeDetailData,
     });
   }
 
   async findAll(params: any) {
-    const { skip, take, where, pageNum } = buildPageQuery(params, ['route_id', 'detail_id']);
+    const { skip, take, where, pageNum } = buildPageQuery(params, [
+      'route_id',
+      'detail_id',
+    ]);
     // 获取分页数据
     const data = await this.prisma.routeDetail.findMany({
       skip,
       take,
       where,
-      include: { route: true }
+      include: { route: true },
     });
     const total = await this.prisma.routeDetail.count({ where });
 
@@ -79,18 +84,23 @@ export class RouteDetailService {
   }
 
   findOne(id: number) {
-    return this.prisma.routeDetail.findUnique({ where: { detail_id: id } })
+    return this.prisma.routeDetail.findUnique({ where: { detail_id: id } });
   }
 
   update(id: number, updateRouteDetailDto: Prisma.RouteDetailUpdateInput) {
-    return this.prisma.routeDetail.update({ where: { detail_id: id }, data: updateRouteDetailDto })
+    return this.prisma.routeDetail.update({
+      where: { detail_id: id },
+      data: updateRouteDetailDto,
+    });
   }
 
   remove(id: number) {
-    return this.prisma.routeDetail.delete({ where: { detail_id: id } })
+    return this.prisma.routeDetail.delete({ where: { detail_id: id } });
   }
 
-  async updateOrders(stationOrders: Array<{ detail_id: number, station_order: number }>) {
+  async updateOrders(
+    stationOrders: Array<{ detail_id: number; station_order: number }>,
+  ) {
     // TODO djr 不允许有重复station_order 且 station_order > 0
     return await Promise.all(
       stationOrders.map(async (order) => {
@@ -100,8 +110,7 @@ export class RouteDetailService {
             station_order: order.station_order,
           },
         });
-      })
+      }),
     );
   }
 }
-

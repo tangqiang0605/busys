@@ -1,0 +1,25 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": false, // 禁用默认的格式化工具
+  "eslint.format.enable": true, // 允许 ESLint 作为格式化工具
+  "eslint.validate": [ // 指定 ESLint 验证的文件类型
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint" // 针对 JavaScript 文件使用 ESLint
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint" // 针对 JavaScript React 文件使用 ESLint
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint" // 针对 TypeScript 文件使用 ESLint
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint" // 针对 TypeScript React 文件使用 ESLint
+  }
+}

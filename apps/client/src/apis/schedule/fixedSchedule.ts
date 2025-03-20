@@ -1,19 +1,18 @@
 import { accessTokenKey } from "../user";
 import { Response } from "../types";
-export interface RouteSchedule {
+
+export interface FixedSchedule {
   schedule_id: number,
-  route_id: number,
-  schedule_name: string,
-  start_time: string;
-  end_time: string;
-  created_at?: string,
-  updated_at?: string,
+  description: string;
+  weekly_schedule: Array<{ routeIds: number[] }>,
+  createdAt: string;
+  updatedAt: string;
 }
 
-export async function getAllRouteScheduleApi(params: Record<string, string>) {
+export async function getAllFixedScheduleApi(params: Record<string, string>) {
   const searchParams = new URLSearchParams(params);
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
-  const result = await fetch(`/api/routeSchedule?${searchParams.toString()}`, {
+  const result = await fetch(`/api/fixedSchedule?${searchParams.toString()}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -21,14 +20,14 @@ export async function getAllRouteScheduleApi(params: Record<string, string>) {
     }
   })
 
-  const response = await result.json() as Response<{ total: number, pageNum: number, pageSize: number, data: Array<RouteSchedule> }>
+  const response = await result.json() as Response<{ total: number, pageNum: number, pageSize: number, data: Array<FixedSchedule> }>
   return response
 }
 
-export async function createRouteScheduleApi(params: Partial<RouteSchedule>) {
+export async function createFixedScheduleApi(params: Partial<FixedSchedule>) {
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
 
-  const result = await fetch('/api/routeSchedule', {
+  const result = await fetch('/api/fixedSchedule', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,9 +41,9 @@ export async function createRouteScheduleApi(params: Partial<RouteSchedule>) {
 }
 
 
-export async function updateRouteScheduleApi(id: string, data: Partial<RouteSchedule>) {
+export async function updateFixedScheduleApi(id: string, data: Partial<FixedSchedule>) {
   const accessToken = (JSON.parse(localStorage.getItem(accessTokenKey) || '{}')).data;
-  const result = await fetch(`/api/routeSchedule/${id}`, {
+  const result = await fetch(`/api/fixedSchedule/${id}`, {
     method: "PATCH",
     headers: {
       'Content-Type': "application/json",
@@ -57,9 +56,9 @@ export async function updateRouteScheduleApi(id: string, data: Partial<RouteSche
 
 }
 
-export async function deleteRouteScheduleApi(id: string) {
+export async function deleteFixedScheduleApi(id: string) {
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
-  const result = await fetch(`/api/routeSchedule/${id}`, {
+  const result = await fetch(`/api/fixedSchedule/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': "application/json",
@@ -68,5 +67,4 @@ export async function deleteRouteScheduleApi(id: string) {
   })
   const response = await result.json()
   return response
-
 }

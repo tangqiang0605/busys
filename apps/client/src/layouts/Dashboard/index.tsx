@@ -73,7 +73,6 @@ export default function Dashboard() {
           location={location}
           {...settings}
         >
-
           <TokenInfo />
           <Outlet />
         </ProLayout>
@@ -84,7 +83,8 @@ export default function Dashboard() {
             setSetting(changeSetting);
           }}
         // disableUrlParams
-        /></> : <Result
+        />
+      </> : <Result
         title="请先登录"
         extra={
           <Button type="primary" key="console" onClick={() => navigate('/login')}>

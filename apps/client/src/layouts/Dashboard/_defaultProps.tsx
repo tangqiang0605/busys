@@ -1,17 +1,14 @@
 import {
   CarOutlined,
-  ChromeFilled,
-  CrownFilled,
   DollarCircleOutlined,
   EnvironmentOutlined,
   FileDoneOutlined,
   NotificationOutlined,
   SafetyOutlined,
-  SmileFilled,
-  TabletFilled,
   TeamOutlined,
   UserOutlined,
   UsergroupAddOutlined,
+  NodeIndexOutlined,
 } from '@ant-design/icons';
 
 export const routes = [
@@ -35,6 +32,21 @@ export const routes = [
     ],
   },
   {
+    path: '/route',
+    name: "路线管理",
+    icon: <NodeIndexOutlined />,
+    routes: [
+      {
+        path: "/route/info",
+        name: "路线信息管理",
+      },
+      {
+        path: '/route/schedule',
+        name: '路线排班管理'
+      },
+    ]
+  },
+  {
     path: "/station",
     name: "车站管理",
     icon: <EnvironmentOutlined />,
@@ -43,14 +55,7 @@ export const routes = [
         path: "/station/info",
         name: "车站信息管理",
       },
-      {
-        path: "/station/route",
-        name: "路线信息管理",
-      },
-      {
-        path: '/station/schedule',
-        name: '路线排班管理'
-      },
+
       {
         path: "/station/monitor",
         name: "车站监控系统",

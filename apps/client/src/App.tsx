@@ -8,8 +8,8 @@ import DriverInfo from './pages/driver/DriverInfo';
 import DriverSchedule from './pages/driver/DriverSchedule/index';
 import DriverEvaluation from './pages/driver/DriverEvaluation';
 import StationInfo from './pages/station/StationInfo';
-import RouteInfo from './pages/station/RouteInfo';
-import RouteSchedule from './pages/station/Schedule/index'
+import RouteInfo from './pages/route/RouteInfo';
+import RouteSchedule from './pages/route/Schedule/index'
 
 const App = () => {
   return (
@@ -36,10 +36,13 @@ const App = () => {
         {/* 车站管理 */}
         <Route path="station">
           <Route path="info" element={<StationInfo />} />
-          <Route path='route' element={<RouteInfo />} />
-          <Route path='schedule' element={<RouteSchedule />} />
           {/* <Route path="monitor" element={<StationMonitor />} />
           <Route path="maintenance" element={<StationMaintenance />} /> */}
+        </Route>
+
+        <Route path='route'>
+          <Route path='info' element={<RouteInfo />} />
+          <Route path='schedule' element={<RouteSchedule />} />
         </Route>
 
 

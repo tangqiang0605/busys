@@ -7,7 +7,6 @@ function TokenInfo() {
   const [accessToken] = useLocalStorageState<{ data: string }>(accessTokenKey);
   return (
     <div>
-
       <div>          {JSON.stringify(accessToken)}</div>
       <Button onClick={() => {
 

@@ -1,19 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, Query, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpException,
+  HttpStatus,
+  Query,
+  UseInterceptors,
+} from '@nestjs/common';
 import { RouteScheduleService } from './routeSchedule.service';
 import { Prisma, RouteSchedule } from '@prisma/client';
 import { createCacheBusterInterceptor } from '../../common/interceptors/cache-buster.interceptor';
 
 @Controller('routeSchedule')
 export class RouteScheduleController {
-  constructor(private readonly routeScheduleService: RouteScheduleService) { }
+  constructor(private readonly routeScheduleService: RouteScheduleService) {}
 
   @Post()
-  async create(@Body() createRouteScheduleDto: Prisma.RouteScheduleCreateInput & RouteSchedule) {
+  async create(
+    @Body()
+    createRouteScheduleDto: Prisma.RouteScheduleCreateInput & RouteSchedule,
+  ) {
     try {
-      const result = await this.routeScheduleService.create(createRouteScheduleDto);
+      const result = await this.routeScheduleService.create(
+        createRouteScheduleDto,
+      );
       return result;
     } catch (err) {
-      throw new HttpException(err, HttpStatus.BAD_REQUEST)
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -29,13 +46,19 @@ export class RouteScheduleController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateRouteScheduleDto: Prisma.
-    RouteScheduleUpdateInput & RouteSchedule) {
+  async update(
+    @Param('id') id: string,
+    @Body()
+    updateRouteScheduleDto: Prisma.RouteScheduleUpdateInput & RouteSchedule,
+  ) {
     try {
-      const result = await this.routeScheduleService.update(+id, updateRouteScheduleDto);
-      return result
+      const result = await this.routeScheduleService.update(
+        +id,
+        updateRouteScheduleDto,
+      );
+      return result;
     } catch (err) {
-      throw new HttpException(err, HttpStatus.BAD_REQUEST)
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -43,4 +66,4 @@ export class RouteScheduleController {
   remove(@Param('id') id: string) {
     return this.routeScheduleService.remove(+id);
   }
-};
+}

@@ -1,19 +1,42 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpException,
+  HttpStatus,
+  UseInterceptors,
+  Query,
+} from '@nestjs/common';
 import { FixedScheduleService } from './fixedSchedule.service';
 import { Prisma } from '@prisma/client';
+import { createCacheBusterInterceptor } from '../../common/interceptors/cache-buster.interceptor';
 
 @Controller('fixedSchedule')
 export class FixedScheduleController {
-  constructor(private readonly fixedScheduleService: FixedScheduleService) { }
+  constructor(private readonly fixedScheduleService: FixedScheduleService) {}
 
   @Post()
-  create(@Body() createFixedScheduleDto: Prisma.FixedScheduleCreateInput) {
-    return this.fixedScheduleService.create(createFixedScheduleDto);
+  async create(
+    @Body() createFixedScheduleDto: Prisma.FixedScheduleCreateInput,
+  ) {
+    try {
+      const result = await this.fixedScheduleService.create(
+        createFixedScheduleDto,
+      );
+      return result;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()
-  findAll() {
-    return this.fixedScheduleService.findAll();
+  @UseInterceptors(createCacheBusterInterceptor(['timestamp', 'timeStamp']))
+  findAll(@Query() query: any) {
+    return this.fixedScheduleService.findAll(query);
   }
 
   @Get(':id')
@@ -22,8 +45,10 @@ export class FixedScheduleController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFixedScheduleDto: Prisma.
-    FixedScheduleUpdateInput) {
+  update(
+    @Param('id') id: string,
+    @Body() updateFixedScheduleDto: Prisma.FixedScheduleUpdateInput,
+  ) {
     return this.fixedScheduleService.update(+id, updateFixedScheduleDto);
   }
 
@@ -31,4 +56,4 @@ export class FixedScheduleController {
   remove(@Param('id') id: string) {
     return this.fixedScheduleService.remove(+id);
   }
-};
+}
