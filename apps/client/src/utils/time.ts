@@ -25,10 +25,10 @@ export function ymd2iso(ymd: string) {
  * @returns 
  */
 export const iso2hhmm = (str: string) => {
-  const date = new Date(str);
-  const hours = String(date.getUTCHours()).padStart(2, '0');
-  const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-  const timeString = `${hours}:${minutes}`;
+  // const date = new Date(str);
+  // const hours = String(date.getUTCHours()).padStart(2, '0');
+  // const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+  // const timeString = `${hours}:${minutes}`;
   // return timeString
 
   const utcDate = dayjs.utc(str);

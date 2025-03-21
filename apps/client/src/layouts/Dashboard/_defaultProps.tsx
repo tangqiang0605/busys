@@ -10,6 +10,7 @@ import {
   UsergroupAddOutlined,
   NodeIndexOutlined,
   SmileOutlined,
+  ShoppingOutlined,
 } from '@ant-design/icons';
 
 export const routes = [
@@ -85,6 +86,20 @@ export const routes = [
         name: "车辆维护提醒",
       },
     ],
+  },
+  {
+    path: "facility",
+    name: "物资管理",
+    icon: <ShoppingOutlined />,
+    routes: [
+      {
+        path: "/facility/facilityInfo",
+        name: '物资实例信息'
+      }, {
+        path: "/facility/facilityType",
+        name: "物资类型管理"
+      }
+    ]
   },
   {
     path: "/supply",

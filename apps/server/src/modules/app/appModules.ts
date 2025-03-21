@@ -23,6 +23,9 @@ import { Logger } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { KeepAliveService } from '../timer/KeepAliveSerivce';
 import { VehicleModule } from '../vehicle/vehicle.module';
+import { FacilityModule } from '../facility/facility.module';
+import { FacilityTypesModule } from '../facilityTypes/facilityTypes.module';
+// import { FacilitieModule } from '../fa/facilitie.module';
 
 export const appModules = {
   imports: [
@@ -47,6 +50,9 @@ export const appModules = {
     ExtraScheduleModule,
     ScheduleModule.forRoot(),
     VehicleModule,
+    // FacilitieModule,
+    FacilityModule,
+    FacilityTypesModule,
   ],
   controllers: [AppController],
   providers: [

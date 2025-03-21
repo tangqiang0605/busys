@@ -1,7 +1,7 @@
 import { Response } from "../apis/types";
 
 // TODO 完善类型注释
-export const getDataFnFactory = <T>(navigate: any, fn: (query: any & { pageNum?: number, pageSize?: number }) => Promise<Response<{ total: number, pageNum: number, pageSize: number, data: any[] }>>, keyName: string, preHandle: any = (restParams: any) => restParams) => {
+export const getDataFnFactory = <T extends any[]>(navigate: any, fn: (query: any & { pageNum?: number, pageSize?: number }) => Promise<Response<{ total: number, pageNum: number, pageSize: number, data: any[] }>>, keyName: keyof T[number], preHandle: any = (restParams: any) => restParams) => {
   return async (params: any & { current: number, pageSize: number }, sort: any, filter: any) => {
 
     // 请求过程请通过抓包获取

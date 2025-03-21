@@ -1,4 +1,4 @@
-import { ProColumnType, ProForm, ProFormText, ProFormDatePicker, ProFormSelect } from "@ant-design/pro-components";
+import { ProColumnType, ProForm, ProFormText, ProFormDatePicker } from "@ant-design/pro-components";
 import InfoAction from "./InfoAction";
 import { Vehicle } from "../../../apis/vehicle/vehicle";
 

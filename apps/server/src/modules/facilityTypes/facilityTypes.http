@@ -1,0 +1,44 @@
+### 所有公交车
+GET http://localhost:3000/facilityTypes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjU2NTgwNCwiZXhwIjoxNzQyNjUyMjA0fQ.NuFLTdt3SRQFVtDmALQgklYPuXn72rydWGgbHlWbU0Q
+
+### 创建设备类型
+POST http://localhost:3000/facilityTypes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjU2NTgwNCwiZXhwIjoxNzQyNjUyMjA0fQ.NuFLTdt3SRQFVtDmALQgklYPuXn72rydWGgbHlWbU0Q
+
+{
+  "type_name":"球形监控",
+  "type_description":"监控",
+  "image_url":"https://example.com/image.jpg",
+  "price":600
+}
+
+### 更新车辆信息
+PUT http://localhost:3000/facilityTypes/1
+Content-Type: application/json
+Authorization: Bearer <你的token>
+
+{
+  "license_plate": "ABC123",
+  "vehicle_type": "电动",
+  "capacity": 45,
+  "purchase_date": "2023-01-01T00:00:00Z",
+  "status": "维修",
+  "vehicle_name": "电动公交车",
+  "price": 200000,
+  "manufacturer": "某厂家",
+  "model": "某型号",
+  "image_url": "http://example.com/image.jpg"
+}
+
+### 删除车辆
+DELETE http://localhost:3000/facilityTypes/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
+
+### 获取单个车辆信息
+GET http://localhost:3000/facilityTypes/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U

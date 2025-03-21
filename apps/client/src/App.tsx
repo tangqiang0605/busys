@@ -10,6 +10,8 @@ import RouteInfo from './pages/route/RouteInfo';
 import RouteSchedule from './pages/route/Schedule/index'
 import DevTools from './pages/DevTools';
 import VehicleInfo from './pages/vehicle/VehicleInfo';
+import FacilityTypeInfo from './pages/facility/FacilityTypeInfo';
+import FacilityInfo from './pages/facility/FacilityInfo';
 
 const App = () => {
   return (
@@ -51,6 +53,11 @@ const App = () => {
           <Route path="info" element={<VehicleInfo />} />
           {/* <Route path="schedule" element={<VehicleSchedule />} /> */}
           {/* <Route path="maintenance" element={<VehicleMaintenance />} /> */}
+        </Route>
+
+        <Route path='facility'>
+          <Route path='facilityInfo' element={<FacilityInfo />}></Route>
+          <Route path='facilityType' element={<FacilityTypeInfo />}></Route>
         </Route>
 
         <Route path='devtools' element={<DevTools />} />
