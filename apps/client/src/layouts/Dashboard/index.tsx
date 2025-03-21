@@ -73,7 +73,7 @@ export default function Dashboard() {
           location={location}
           {...settings}
         >
-          <TokenInfo />
+          {/* <TokenInfo /> */}
           <Outlet />
         </ProLayout>
         <SettingDrawer

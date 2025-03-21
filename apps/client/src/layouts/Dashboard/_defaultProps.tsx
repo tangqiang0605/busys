@@ -9,6 +9,7 @@ import {
   UserOutlined,
   UsergroupAddOutlined,
   NodeIndexOutlined,
+  SmileOutlined,
 } from '@ant-design/icons';
 
 export const routes = [
@@ -191,6 +192,11 @@ export const routes = [
       },
     ],
   },
+  {
+    path: "/devtools",
+    name: '开发者工具',
+    icon: <SmileOutlined />
+  }
 ];
 
 export default {

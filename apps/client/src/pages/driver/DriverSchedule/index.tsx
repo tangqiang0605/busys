@@ -1,4 +1,5 @@
 import {
+  PageContainer,
   ProCard
 } from '@ant-design/pro-components';
 import InfoTable from './InfoTable';
@@ -14,18 +15,21 @@ export default function DriverSchedule() {
   // TODO tab切换同步到url上
   return (
     <div>
-      <ProCard tabs={{
-        items: [
-          {
-            label: '固定工作时间表',
-            key: 'fixed',
-            children: <InfoTable />
-          }, {
-            label: '不固定工作时间表',
-            key: 'unfixed',
-            children: (<ExtraInfoTable />)
-          }]
-      }} />
+      <PageContainer>
+
+        <ProCard tabs={{
+          items: [
+            {
+              label: '固定工作时间表',
+              key: 'fixed',
+              children: <InfoTable />
+            }, {
+              label: '不固定工作时间表',
+              key: 'unfixed',
+              children: (<ExtraInfoTable />)
+            }]
+        }} />
+      </PageContainer>
     </div>
   )
 }
