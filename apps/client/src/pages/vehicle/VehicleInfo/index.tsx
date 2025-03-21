@@ -2,10 +2,10 @@ import { PageContainer } from '@ant-design/pro-components';
 import InfoTable from './InfoTable';
 
 /**
- * 路线班次管理
+ * 车辆信息管理
  * @returns 
  */
-export default function RouteSchedule() {
+export default function VehicleInfo() {
   return (
     <div>
       <PageContainer>

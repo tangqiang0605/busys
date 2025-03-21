@@ -1,9 +1,7 @@
-import React from 'react';
+
 import { Routes, Route } from 'react-router-dom';
 import Layout from './layouts/Dashboard/index';
 import Login from './pages/Login';
-import User from './pages/User';
-import Store from './pages/Store';
 import DriverInfo from './pages/driver/DriverInfo';
 import DriverSchedule from './pages/driver/DriverSchedule/index';
 import DriverEvaluation from './pages/driver/DriverEvaluation';
@@ -11,6 +9,7 @@ import StationInfo from './pages/station/StationInfo';
 import RouteInfo from './pages/route/RouteInfo';
 import RouteSchedule from './pages/route/Schedule/index'
 import DevTools from './pages/DevTools';
+import VehicleInfo from './pages/vehicle/VehicleInfo';
 
 const App = () => {
   return (
@@ -41,9 +40,17 @@ const App = () => {
           <Route path="maintenance" element={<StationMaintenance />} /> */}
         </Route>
 
+
+
         <Route path='route'>
           <Route path='info' element={<RouteInfo />} />
           <Route path='schedule' element={<RouteSchedule />} />
+        </Route>
+
+        <Route path="vehicle">
+          <Route path="info" element={<VehicleInfo />} />
+          {/* <Route path="schedule" element={<VehicleSchedule />} /> */}
+          {/* <Route path="maintenance" element={<VehicleMaintenance />} /> */}
         </Route>
 
         <Route path='devtools' element={<DevTools />} />

@@ -4,44 +4,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { useNavigate } from 'react-router';
 import { getDataFnFactory } from '../../../utils/factory';
-import { FixedScheduleForm } from './constants';
+// import { Vehicle, createVehicleApi, getAllStationApi } from '../../../apis/station';
+import { VehicleForm } from './constants';
 import { defaultForm, tableSettings } from './constants';
 import { Button, message } from 'antd';
-import { incremented } from '../../../store/route';
+// TODO 搞一个common
+import { incremented } from '../../../store/common';
 import { CreateForm } from '../../../components/CreateForm';
-// import { Route, createRouteApi, getAllRouteApi } from '../../../apis/route';
-import { FixedSchedule, createFixedScheduleApi, getAllFixedScheduleApi } from '../../../apis/schedule/fixedSchedule';
+import { Vehicle, createVehicleApi, getAllVehicleApi } from '../../../apis/vehicle/vehicle';
+import { ymd2iso } from '../../../utils/time';
 
 export default function InfoTable() {
-  const refreshTable = useSelector((state: RootState) => state.route.refreshTable);
+  const refreshTable = useSelector((state: RootState) => state.common.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
-  const getData = getDataFnFactory<FixedSchedule[]>(navigate, getAllFixedScheduleApi, 'schedule_id')
+  const getData = getDataFnFactory<Vehicle[]>(navigate, getAllVehicleApi, 'vehicle_id', (params: Vehicle): Vehicle => {
+    if (params.purchase_date) {
+      return {
+        ...params,
+        purchase_date: ymd2iso(params.purchase_date)
+      }
+    } else {
+      return params;
+    }
+  })
 
   const dispatch = useDispatch();
-  const onSubmit = async (values: FixedSchedule) => {
-    // 表单数据提交后端前预处理
-    const workdays = values.weekly_schedule.length
-    if (workdays > 7) {
-      message.error(`最多安排一周七天，不能安排${workdays}天`)
-      return;
-    }
-    try {
-      values.weekly_schedule = values.weekly_schedule.map(({ routeIds }) => {
-        // TODO djr 前端检测输入的id是否重复
-        if (Array.isArray(routeIds)) {
-          return { routeIds }
-        }
-        return { routeIds: (routeIds as any as string).split(',').map(Number) }
-      })
-    } catch (err) {
-      message.error('格式有误')
-      console.error('routeIds格式有误', err)
-      return;
-    }
-    const result = await createFixedScheduleApi(values)
+  const onSubmit = async (values: Vehicle) => {
+    const result = await createVehicleApi(values)
     if (result?.data) {
-      message.success('创建成功啦')
+      message.success('创建成功')
       dispatch(
         incremented({
           unit: 1
@@ -66,29 +58,28 @@ export default function InfoTable() {
       <ProCard style={{ height: '100vh', overflow: 'auto' }}>
         <ProTable
           {...tableSettings}
-          rowKey={'schedule_id'}
           rowSelection={{
             selectedRowKeys: selections,
             onChange(selectedRowKeys) {
-              console.log(selectedRowKeys)
-              setSelections(selectedRowKeys as number[])
+              if (selectedRowKeys.length > 1) {
+                setSelections([(selectedRowKeys as number[]).at(-1)!])
+              } else {
+                setSelections(selectedRowKeys as number[])
+              }
             }
           }}
+          rowKey={'vehicle_id'}
           params={{ timestamp: refreshTable }}
-          request={async (...a) => {
-            const b = await getData(...a);
-            console.log(b);
-            return b;
-          }}
+          request={getData}
           toolBarRender={() => [
-            <CreateForm<FixedSchedule>
+            <CreateForm<Vehicle>
               title="新增信息"
               initForm={defaultForm}
               onSubmit={onSubmit}
               triggerRender={() => {
                 return <Button type="primary">新增</Button>
               }} >
-              <FixedScheduleForm />
+              <VehicleForm />
             </CreateForm>
           ]}
         />

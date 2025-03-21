@@ -13,6 +13,13 @@ export function hms2iso(hms: string) {
 }
 
 /**
+ * 日期转ios
+ */
+export function ymd2iso(ymd: string) {
+  return `${ymd}T00:00:00.000Z`
+}
+
+/**
  * iso 转 HH:MM:ss
  * @param str 
  * @returns 

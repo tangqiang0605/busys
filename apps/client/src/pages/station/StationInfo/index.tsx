@@ -1,18 +1,14 @@
 import { PageContainer } from '@ant-design/pro-components';
 import InfoTable from './InfoTable';
-import { useState } from 'react';
 
 /**
- * 管理员看到的
+ * 车站信息管理
  * @returns 
  */
-export default function DriverSchedule() {
-  const [tab, setTab] = useState('fixed')
+export default function StationInfo() {
   return (
     <div>
-      <PageContainer
-      // content={'查看和管理司机排班信息'}
-      >
+      <PageContainer>
         <InfoTable />
       </PageContainer>
     </div>

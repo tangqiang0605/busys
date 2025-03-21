@@ -16,7 +16,7 @@ const resourceNameUpper = resourceName.charAt(0).toUpperCase() + resourceName.sl
 const resourceDir = path.join(process.cwd(), resourceName);
 
 // 模板目录
-const templatesDir = path.join(__dirname, '..', 'templates', argv._[3] ?? 'crud');
+const templatesDir = path.join(__dirname, '..', 'templates', argv._[3] ?? 'crud2');
 
 // 创建资源目录
 mkdirp.sync(resourceDir);
@@ -26,6 +26,7 @@ const templates = [
   { template: 'controller.txt', output: `${resourceName}.controller.ts` },
   { template: 'service.txt', output: `${resourceName}.service.ts` },
   { template: 'module.txt', output: `${resourceName}.module.ts` },
+  { template: 'http.txt', output: `${resourceName}.http` },
   // { template: 'entity.txt', output: `${resourceName}.entity.ts` },
   // { template: 'dto.txt', output: `${resourceName}.dto.ts` },
 ];

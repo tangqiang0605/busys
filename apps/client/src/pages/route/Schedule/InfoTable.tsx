@@ -16,7 +16,7 @@ export default function InfoTable() {
   const refreshTable = useSelector((state: RootState) => state.route.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
-  const getData = getDataFnFactory<RouteSchedule[]>(navigate, getAllRouteScheduleApi)
+  const getData = getDataFnFactory<RouteSchedule[]>(navigate, getAllRouteScheduleApi, 'schedule_id')
 
   const dispatch = useDispatch();
   const onSubmit = async (values: RouteSchedule) => {
@@ -36,6 +36,7 @@ export default function InfoTable() {
       message.error('创建失败')
       console.log('创建失败', result)
     }
+    return true;
   }
   return (
     <ProCard
@@ -78,7 +79,7 @@ export default function InfoTable() {
           }}
           toolBarRender={() => [
             <CreateForm<RouteSchedule>
-              title="修改信息"
+              title="新增信息"
               initForm={defaultForm}
               onSubmit={onSubmit}
               triggerRender={() => {

@@ -1,0 +1,48 @@
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  Query,
+} from '@nestjs/common';
+import { <%= resourceNameUpper %>Service } from './<%= resourceName %>.service';
+import { Prisma } from '@prisma/client';
+import { createCacheBusterInterceptor } from 'src/common/interceptors/cache-buster.interceptor';
+
+@Controller('<%= resourceName %>')
+export class <%= resourceNameUpper %>Controller {
+  constructor(private readonly <%= resourceName %>Service: <%= resourceNameUpper %>Service) {}
+
+  @Post()
+  create(@Body() create<%= resourceNameUpper %>Dto: Prisma.<%= resourceNameUpper %>CreateInput) {
+    return this.<%= resourceName %>Service.create(create<%= resourceNameUpper %>Dto);
+  }
+
+  @Get()
+  @UseInterceptors(createCacheBusterInterceptor(['timestamp', 'timeStamp']))
+  findAll(@Query() query: any) {
+    return this.<%= resourceName %>Service.findAll(query);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.<%= resourceName %>Service.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() update<%= resourceNameUpper %>Dto: Prisma.<%= resourceNameUpper %>UpdateInput,
+  ) {
+    return this.<%= resourceName %>Service.update(+id, update<%= resourceNameUpper %>Dto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.<%= resourceName %>Service.remove(+id);
+  }
+}

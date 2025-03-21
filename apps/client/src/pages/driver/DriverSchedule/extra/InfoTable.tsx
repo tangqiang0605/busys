@@ -16,7 +16,7 @@ export default function InfoTable() {
   const refreshTable = useSelector((state: RootState) => state.driver.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
-  const getData = getDataFnFactory<ExtraSchedule[]>(navigate, getAllExtraScheduleApi)
+  const getData = getDataFnFactory<ExtraSchedule[]>(navigate, getAllExtraScheduleApi, 'schedule_id')
 
   const dispatch = useDispatch();
   const onSubmit = async (values: ExtraSchedule) => {

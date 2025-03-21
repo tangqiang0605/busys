@@ -1,8 +1,9 @@
 import { Response } from "../apis/types";
 
 // TODO 完善类型注释
-export const getDataFnFactory = <T>(navigate: any, fn: (query: any & { pageNum?: number, pageSize?: number }) => Promise<Response<{ total: number, pageNum: number, pageSize: number, data: any[] }>>) => {
+export const getDataFnFactory = <T>(navigate: any, fn: (query: any & { pageNum?: number, pageSize?: number }) => Promise<Response<{ total: number, pageNum: number, pageSize: number, data: any[] }>>, keyName: string, preHandle: any = (restParams: any) => restParams) => {
   return async (params: any & { current: number, pageSize: number }, sort: any, filter: any) => {
+
     // 请求过程请通过抓包获取
     //  TODO 当列出于筛选或者排序的时候，也应该进行处理
     // https://ant-design.antgroup.com/components/table-cn#table-demo-head 筛选与排序
@@ -10,7 +11,7 @@ export const getDataFnFactory = <T>(navigate: any, fn: (query: any & { pageNum?:
     const query = {
       pageNum: current,
       pageSize,
-      ...restParams
+      ...preHandle(restParams)
     }
     const result = await fn(query)
     if (result.statusCode === 401) {
@@ -18,7 +19,7 @@ export const getDataFnFactory = <T>(navigate: any, fn: (query: any & { pageNum?:
       return { data: [] }
     }
     // TODO 把这段转到driver那里
-    const data = result?.data?.data?.map(item => ({ ...item, key: item.driver_id }))
+    const data = result?.data?.data?.map(item => ({ ...item, key: item[keyName] }))
     return {
       data: data as T,
       // success 请返回 true，

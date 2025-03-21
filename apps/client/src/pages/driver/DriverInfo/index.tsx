@@ -2,13 +2,10 @@
 import {
   PageContainer,
 } from '@ant-design/pro-components';
-
 import DriverTable from './DriverInfoTable';
 
-
-
 /**
- * 管理员看到的
+ * 司机信息管理
  * @returns 
  */
 function DriverInfo() {

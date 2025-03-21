@@ -15,7 +15,7 @@ export default function InfoTable() {
   const refreshTable = useSelector((state: RootState) => state.route.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
-  const getData = getDataFnFactory<Route[]>(navigate, getAllRouteApi)
+  const getData = getDataFnFactory<Route[]>(navigate, getAllRouteApi, 'route_id')
 
   const dispatch = useDispatch();
   const onSubmit = async (values: Route) => {

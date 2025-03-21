@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { DriverInfoTableData } from '../../../apis/types';
 import { deleteDriverApi, updateDriverInfoApi } from '../../../apis/driver';
-import driver, { incremented } from '../../../store/driver';
+import { incremented } from '../../../store/driver';
 import { Button, Popconfirm, PopconfirmProps, Space, message } from 'antd';
 import { CreateDriver } from './DriverInfoForm';
 

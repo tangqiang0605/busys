@@ -15,7 +15,7 @@ export default function InfoTable() {
   const refreshTable = useSelector((state: RootState) => state.station.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
-  const getData = getDataFnFactory<Station[]>(navigate, getAllStationApi)
+  const getData = getDataFnFactory<Station[]>(navigate, getAllStationApi, 'station_id')
 
   const dispatch = useDispatch();
   const onSubmit = async (values: Station) => {
@@ -31,6 +31,7 @@ export default function InfoTable() {
       message.error('创建失败')
       console.log('创建失败', result)
     }
+    return true;
   }
   return (
     <ProCard
@@ -60,7 +61,7 @@ export default function InfoTable() {
           request={getData}
           toolBarRender={() => [
             <CreateForm<Station>
-              title="修改信息"
+              title="新增信息"
               initForm={defaultForm}
               onSubmit={onSubmit}
               triggerRender={() => {
