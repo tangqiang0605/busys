@@ -2,6 +2,7 @@ import {
   ProCard
 } from '@ant-design/pro-components';
 import InfoTable from './InfoTable';
+import ExtraInfoTable from './extra/InfoTable'
 // import { useState } from 'react';
 
 /**
@@ -9,27 +10,10 @@ import InfoTable from './InfoTable';
  * @returns 
  */
 export default function DriverSchedule() {
-  // const [tab, setTab] = useState('fixed')
+  // TODO 初始tab由url确定
+  // TODO tab切换同步到url上
   return (
     <div>
-      {/* <PageContainer
-        content={'查看和管理司机排班信息'}
-        tabList={[
-          {
-            tab: '固定工作时间表',
-            key: 'fixed',
-          },
-          {
-            tab: '不固定工作时间表',
-            key: 'unfixed',
-          },
-        ]}
-        onTabChange={(value: string) => {
-          setTab(value)
-        }}
-      >
-        {tab === 'fixed' ? <DriverTable /> : "unfixed"}
-      </PageContainer> */}
       <ProCard tabs={{
         items: [
           {
@@ -39,7 +23,7 @@ export default function DriverSchedule() {
           }, {
             label: '不固定工作时间表',
             key: 'unfixed',
-            children: (<div>aa</div>)
+            children: (<ExtraInfoTable />)
           }]
       }} />
     </div>

@@ -1,45 +1,46 @@
 import { ProCard, ProTable, } from '@ant-design/pro-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { RootState } from '../../../../store';
 import { useNavigate } from 'react-router';
-import { getDataFnFactory } from '../../../utils/factory';
-import { FixedScheduleForm } from './constants';
-import { defaultForm, tableSettings } from './constants';
+import { getDataFnFactory } from '../../../../utils/factory';
+import { ExtraScheduleForm } from './constants';
+import { defaultForm, extraTableSettings } from './constants';
 import { Button, message } from 'antd';
-import { incremented } from '../../../store/route';
-import { CreateForm } from '../../../components/CreateForm';
-// import { Route, createRouteApi, getAllRouteApi } from '../../../apis/route';
-import { FixedSchedule, createFixedScheduleApi, getAllFixedScheduleApi } from '../../../apis/schedule/fixedSchedule';
+import { incremented } from '../../../../store/driver';
+import { CreateForm } from '../../../../components/CreateForm';
+import { ExtraSchedule, createExtraScheduleApi, getAllExtraScheduleApi } from '../../../../apis/schedule/extraSchedule';
+// import { ExtraSchedule, createExtraScheduleApi, getAllExtraScheduleApi } from '../../../apis/schedule/fixedSchedule';
 
 export default function InfoTable() {
-  const refreshTable = useSelector((state: RootState) => state.route.refreshTable);
+  const refreshTable = useSelector((state: RootState) => state.driver.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
-  const getData = getDataFnFactory<FixedSchedule[]>(navigate, getAllFixedScheduleApi)
+  const getData = getDataFnFactory<ExtraSchedule[]>(navigate, getAllExtraScheduleApi)
 
   const dispatch = useDispatch();
-  const onSubmit = async (values: FixedSchedule) => {
+  const onSubmit = async (values: ExtraSchedule) => {
     // 表单数据提交后端前预处理
-    const workdays = values.weekly_schedule.length
+    const workdays = values.special_schedule.length
     if (workdays > 7) {
       message.error(`最多安排一周七天，不能安排${workdays}天`)
       return;
     }
     try {
-      values.weekly_schedule = values.weekly_schedule.map(({ routeIds }) => {
+      values.special_schedule = values.special_schedule.map((item) => {
         // TODO djr 前端检测输入的id是否重复
+        const { routeIds } = item;
         if (Array.isArray(routeIds)) {
-          return { routeIds }
+          return item;
         }
-        return { routeIds: (routeIds as any as string).split(',').map(Number) }
+        return { Date: item.Date, routeIds: (routeIds as any as string).split(',').map(Number) }
       })
     } catch (err) {
       message.error('格式有误')
       console.error('routeIds格式有误', err)
       return;
     }
-    const result = await createFixedScheduleApi(values)
+    const result = await createExtraScheduleApi(values)
     if (result?.data) {
       message.success('创建成功啦')
       dispatch(
@@ -65,7 +66,7 @@ export default function InfoTable() {
     >
       <ProCard style={{ height: '100vh', overflow: 'auto' }}>
         <ProTable
-          {...tableSettings}
+          {...extraTableSettings}
           rowKey={'schedule_id'}
           rowSelection={{
             selectedRowKeys: selections,
@@ -81,14 +82,14 @@ export default function InfoTable() {
             return b;
           }}
           toolBarRender={() => [
-            <CreateForm<FixedSchedule>
+            <CreateForm<ExtraSchedule>
               title="新增信息"
               initForm={defaultForm}
               onSubmit={onSubmit}
               triggerRender={() => {
                 return <Button type="primary">新增</Button>
               }} >
-              <FixedScheduleForm />
+              <ExtraScheduleForm />
             </CreateForm>
           ]}
         />

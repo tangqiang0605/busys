@@ -1,0 +1,18 @@
+### 增加固定工作时间表
+POST http://localhost:3000/extraSchedule
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
+
+{
+  "description":"李四不固定工作表（加班、请假表）",
+  "special_schedule":[
+    {"Date":"2025-03-06T14:06:54.947Z",
+    "routeIds":[1]}
+  ]
+}
+
+
+### 查询
+GET http://localhost:3000/extraSchedule
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
