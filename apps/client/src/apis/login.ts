@@ -1,23 +1,6 @@
-import { request } from "../utils/request"
-
-
-// TODO 有没有什么好用的类型注释的方法
-export function login() {
-
-}
-
-export async function readRolesApi() {
-  // const result = await request('/user/read_role', 'POST')
-  const result = await fetch('/api/user/read_role', { method: 'POST' })
-  const body = await result.json()
-  // POST http://localhost:3000/user/read_role
-  return body
-}
-
-
 
 export async function loginApi(params: { id: string, password: string }) {
-  const result = await fetch('/api/user/login', {
+  const result = await fetch('/api/token/login', {
     method: 'POST', headers: {
       "Content-Type": "application/json"
     }, body: JSON.stringify(params)
@@ -46,7 +29,7 @@ export async function tryLoginApi(params: { id: string, password: string }): Pro
 export async function getUserInfoApi() {
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '').data;
   console.log(accessToken)
-  const result = await fetch('/api/user/getinfo', {
+  const result = await fetch('/api/token/getinfo', {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",

@@ -13,6 +13,7 @@ import VehicleInfo from './pages/vehicle/VehicleInfo';
 import FacilityTypeInfo from './pages/facility/FacilityTypeInfo';
 import FacilityInfo from './pages/facility/FacilityInfo';
 import StationSurveillance from './pages/station/StationMonitor';
+import UserInfo from './pages/user/userInfo';
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         {/* <Route index element={<User />} />
         <Route path="user" element={<User />} />
         <Route path="store" element={<Store />} /> */}
-        <Route path="driver">
+        <Route path="driver" >
           <Route path='info' element={<DriverInfo />} />
           <Route path='schedule' element={<DriverSchedule />} />
           <Route path='evaluation' element={<DriverEvaluation />} />
@@ -61,6 +62,9 @@ const App = () => {
           <Route path='facilityType' element={<FacilityTypeInfo />}></Route>
         </Route>
 
+        <Route path='user'>
+          <Route path='userInfo' element={<UserInfo />}></Route>
+        </Route>
         <Route path='devtools' element={<DevTools />} />
 
 

@@ -12,7 +12,7 @@ import {
   ProFormText,
 } from '@ant-design/pro-components';
 import { theme } from 'antd';
-import { tryLoginApi } from '../apis/user';
+import { tryLoginApi } from '../apis/login';
 
 interface LoginForm {
   "username": string,
@@ -33,8 +33,6 @@ const Page = () => {
     }
 
     navigate('/');
-    // const result = await fetch('/api/user/read_role', { method: 'POST' })
-    // console.log(await result.json())
   }
   return (
     <div

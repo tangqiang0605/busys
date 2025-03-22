@@ -1,4 +1,4 @@
-import { accessTokenKey } from "../user";
+import { accessTokenKey } from "../login";
 import { Response } from "../types";
 export interface RouteSchedule {
   schedule_id: number,

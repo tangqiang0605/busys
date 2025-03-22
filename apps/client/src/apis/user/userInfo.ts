@@ -1,20 +1,33 @@
 import { accessTokenKey } from "../login";
 import { Response } from "../types";
 
-export interface StationSurveillance {
-  surveillance_id: number;
-  facility_id: number;
-  station_id: number;
-  timestamp: string;
-  passenger_count: number;
+export interface Role {
+  role_id: number;
+  role_name: string;
+  allowed_routes: string[];
+  allowed_actions: string[];
   created_at: string;
   updated_at: string;
 }
 
-export async function getAllStationSurveillanceApi(params: Record<string, string>) {
+export interface User {
+  user_id: number;
+  username: string;
+  password_hash: string;
+  is_active: boolean;
+  metadata: {
+    driver_id: string;
+  };
+  role_id: number;
+  created_at: string;
+  updated_at: string;
+  role: Role;
+}
+
+export async function getAllUserApi(params: Record<string, string>) {
   const searchParams = new URLSearchParams(params);
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
-  const result = await fetch(`/api/stationSurveillance?${searchParams.toString()}`, {
+  const result = await fetch(`/api/user?${searchParams.toString()}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -22,14 +35,14 @@ export async function getAllStationSurveillanceApi(params: Record<string, string
     }
   })
 
-  const response = await result.json() as Response<{ total: number, pageNum: number, pageSize: number, data: Array<StationSurveillance> }>
+  const response = await result.json() as Response<{ total: number, pageNum: number, pageSize: number, data: Array<User> }>
   return response
 }
 
-export async function createStationSurveillanceApi(params: Partial<StationSurveillance>) {
+export async function createUserApi(params: Partial<User>) {
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
 
-  const result = await fetch('/api/stationSurveillance', {
+  const result = await fetch('/api/user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -43,9 +56,9 @@ export async function createStationSurveillanceApi(params: Partial<StationSurvei
 }
 
 
-export async function updateStationSurveillanceApi(id: string, data: Partial<StationSurveillance>) {
+export async function updateUserApi(id: string, data: Partial<User>) {
   const accessToken = (JSON.parse(localStorage.getItem(accessTokenKey) || '{}')).data;
-  const result = await fetch(`/api/stationSurveillance/${id}`, {
+  const result = await fetch(`/api/user/${id}`, {
     method: "PATCH",
     headers: {
       'Content-Type': "application/json",
@@ -58,9 +71,9 @@ export async function updateStationSurveillanceApi(id: string, data: Partial<Sta
 
 }
 
-export async function deleteStationSurveillanceApi(id: string) {
+export async function deleteUserApi(id: string) {
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
-  const result = await fetch(`/api/stationSurveillance/${id}`, {
+  const result = await fetch(`/api/user/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': "application/json",

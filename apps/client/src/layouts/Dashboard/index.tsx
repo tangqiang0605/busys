@@ -11,8 +11,7 @@ import defaultProps from './_defaultProps';
 import { Link, Outlet, useNavigate } from 'react-router';
 
 import { useLocalStorageState } from 'ahooks';
-import { accessTokenKey, getUserInfoApi } from '../../apis/user';
-import TokenInfo from './TokenInfo';
+import { accessTokenKey, getUserInfoApi } from '../../apis/login';
 
 
 

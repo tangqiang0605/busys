@@ -1,6 +1,6 @@
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from '../user/user.module';
+// import {  } from '../login/user.module';
 import { PrismaModule } from '../../common/prisma/prisma.module';
 
 import { JwtModule } from '@nestjs/jwt';
@@ -26,6 +26,8 @@ import { VehicleModule } from '../vehicle/vehicle.module';
 import { FacilityModule } from '../facility/facility.module';
 import { FacilityTypesModule } from '../facilityTypes/facilityTypes.module';
 import { StationSurveillanceModule } from '../stationSurveillance/stationSurveillance.module';
+import { UserModule } from '../user/user.module';
+import { LoginModule } from '../login/login.module';
 // import { FacilitieModule } from '../fa/facilitie.module';
 
 export const appModules = {
@@ -55,6 +57,7 @@ export const appModules = {
     FacilityModule,
     FacilityTypesModule,
     StationSurveillanceModule,
+    LoginModule,
   ],
   controllers: [AppController],
   providers: [

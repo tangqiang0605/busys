@@ -208,6 +208,17 @@ export const routes = [
     ],
   },
   {
+    path: "/user",
+    name: "账号管理",
+    icon: <TeamOutlined />,
+    routes: [
+      {
+        path: "/user/userInfo",
+        name: "账号信息管理",
+      },
+    ]
+  },
+  {
     path: "/devtools",
     name: '开发者工具',
     icon: <SmileOutlined />

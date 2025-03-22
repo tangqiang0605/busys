@@ -1,8 +1,8 @@
-import * as crypto from 'node:crypto'
+import * as crypto from 'node:crypto';
 // 哈希密码的函数（带盐值）
 export function hashPasswordWithSalt(password) {
   // const salt = crypto.randomBytes(16).toString('hex'); // 生成随机盐值
-  const salt = "96b7239bb2db4c66dd812087a3f835ec"
+  const salt = '96b7239bb2db4c66dd812087a3f835ec';
   // 将密码和盐值组合
   const saltedPassword = `${salt}${password}`;
   const hash = crypto.createHash('sha256');
