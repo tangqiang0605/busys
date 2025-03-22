@@ -13,6 +13,13 @@ export function hms2iso(hms: string) {
 }
 
 /**
+ * DateTimePicker转iso
+ */
+export function dateTime2iso(dateTime: string) {
+  return new Date(dateTime).toISOString()
+}
+
+/**
  * 日期转ios
  */
 export function ymd2iso(ymd: string) {

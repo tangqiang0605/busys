@@ -89,15 +89,15 @@ export const routes = [
   },
   {
     path: "facility",
-    name: "物资管理",
+    name: "设施管理",
     icon: <ShoppingOutlined />,
     routes: [
       {
         path: "/facility/facilityInfo",
-        name: '物资实例信息'
+        name: '设施实例信息'
       }, {
         path: "/facility/facilityType",
-        name: "物资类型管理"
+        name: "设施类型管理"
       }
     ]
   },

@@ -25,6 +25,7 @@ import { KeepAliveService } from '../timer/KeepAliveSerivce';
 import { VehicleModule } from '../vehicle/vehicle.module';
 import { FacilityModule } from '../facility/facility.module';
 import { FacilityTypesModule } from '../facilityTypes/facilityTypes.module';
+import { StationSurveillanceModule } from '../stationSurveillance/stationSurveillance.module';
 // import { FacilitieModule } from '../fa/facilitie.module';
 
 export const appModules = {
@@ -53,6 +54,7 @@ export const appModules = {
     // FacilitieModule,
     FacilityModule,
     FacilityTypesModule,
+    StationSurveillanceModule,
   ],
   controllers: [AppController],
   providers: [

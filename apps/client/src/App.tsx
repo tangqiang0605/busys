@@ -12,6 +12,7 @@ import DevTools from './pages/DevTools';
 import VehicleInfo from './pages/vehicle/VehicleInfo';
 import FacilityTypeInfo from './pages/facility/FacilityTypeInfo';
 import FacilityInfo from './pages/facility/FacilityInfo';
+import StationSurveillance from './pages/station/StationMonitor';
 
 const App = () => {
   return (
@@ -38,8 +39,8 @@ const App = () => {
         {/* 车站管理 */}
         <Route path="station">
           <Route path="info" element={<StationInfo />} />
-          {/* <Route path="monitor" element={<StationMonitor />} />
-          <Route path="maintenance" element={<StationMaintenance />} /> */}
+          <Route path="monitor" element={<StationSurveillance />} />
+          {/* <Route path="maintenance" element={<StationMaintenance />} /> */}
         </Route>
 
 
