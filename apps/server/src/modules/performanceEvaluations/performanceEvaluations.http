@@ -1,0 +1,57 @@
+### GET方法
+GET http://localhost:3000/performanceEvaluations
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjY1MzYzOSwiZXhwIjoxNzQyNzQwMDM5fQ.eKOt7wlo0xfuizrtlA8q-yQ5MhdrHeSA8irwiro9cfA
+
+### POST方法
+POST http://localhost:3000/performanceEvaluations
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjY1MzYzOSwiZXhwIjoxNzQyNzQwMDM5fQ.eKOt7wlo0xfuizrtlA8q-yQ5MhdrHeSA8irwiro9cfA
+
+{
+  "employee_id":1,
+  "evaluation_date":"2023-02-01T00:00:00Z",
+  "metrics":{
+    "attendance":{
+      "title":"出勤",
+      "score":1
+    },
+    "performance":{
+      "title":"表现",
+      "score":1
+    },
+    "evaluation":{
+      "title":"评价",
+      "score":1
+    }
+  },
+  "total_score":3
+}
+
+### PUT方法
+PUT http://localhost:3000/performanceEvaluations/1
+Content-Type: application/json
+Authorization: Bearer <你的token>
+
+{
+  "license_plate": "ABC123",
+  "vehicle_type": "电动",
+  "capacity": 45,
+  "purchase_date": "2023-01-01T00:00:00Z",
+  "status": "维修",
+  "vehicle_name": "电动公交车",
+  "price": 200000,
+  "manufacturer": "某厂家",
+  "model": "某型号",
+  "image_url": "http://example.com/image.jpg"
+}
+
+### DELETE方法
+DELETE http://localhost:3000/performanceEvaluations/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjY1MzYzOSwiZXhwIjoxNzQyNzQwMDM5fQ.eKOt7wlo0xfuizrtlA8q-yQ5MhdrHeSA8irwiro9cfA
+
+### GET方法
+GET http://localhost:3000/performanceEvaluations/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjY1MzYzOSwiZXhwIjoxNzQyNzQwMDM5fQ.eKOt7wlo0xfuizrtlA8q-yQ5MhdrHeSA8irwiro9cfA

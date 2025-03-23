@@ -194,6 +194,14 @@ export const routes = [
         name: "职工信息管理",
       },
       {
+        path: "/staff/jobList",
+        name: '岗位信息表'
+      },
+      {
+        path: '/staff/position',
+        name: "任岗情况"
+      },
+      {
         path: "/staff/attendance",
         name: "考勤管理",
       },
@@ -201,10 +209,11 @@ export const routes = [
         path: "/staff/evaluation",
         name: "绩效评估",
       },
-      {
-        path: "/staff/training",
-        name: "培训与发展",
-      },
+      // TODO 员工培训与发展计划，即每个岗位的description中有写（用ai生成就好）
+      // {
+      //   path: "/staff/training",
+      //   name: "培训与发展",
+      // },
     ],
   },
   {

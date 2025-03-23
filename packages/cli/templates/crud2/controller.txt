@@ -8,6 +8,8 @@ import {
   Delete,
   UseInterceptors,
   Query,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { <%= resourceNameUpper %>Service } from './<%= resourceName %>.service';
 import { Prisma } from '@prisma/client';
@@ -18,8 +20,13 @@ export class <%= resourceNameUpper %>Controller {
   constructor(private readonly <%= resourceName %>Service: <%= resourceNameUpper %>Service) {}
 
   @Post()
-  create(@Body() create<%= resourceNameUpper %>Dto: Prisma.<%= resourceNameUpper %>CreateInput) {
-    return this.<%= resourceName %>Service.create(create<%= resourceNameUpper %>Dto);
+  async create(@Body() create<%= resourceNameUpper %>Dto: Prisma.<%= resourceNameUpper %>CreateInput) {
+    try {
+      const result = await this.<%= resourceName %>Service.create(create<%= resourceNameUpper %>Dto);
+      return result;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()

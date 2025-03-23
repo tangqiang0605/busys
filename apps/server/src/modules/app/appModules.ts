@@ -28,6 +28,10 @@ import { FacilityTypesModule } from '../facilityTypes/facilityTypes.module';
 import { StationSurveillanceModule } from '../stationSurveillance/stationSurveillance.module';
 import { UserModule } from '../user/user.module';
 import { LoginModule } from '../login/login.module';
+import { JobListModule } from '../jobList/jobList.module';
+import { EmployeePositionsModule } from '../employeePositions/employeePositions.module';
+import { AttendanceModule } from '../attendance/attendance.module';
+import { PerformanceEvaluationsModule } from '../performanceEvaluations/performanceEvaluations.module';
 // import { FacilitieModule } from '../fa/facilitie.module';
 
 export const appModules = {
@@ -58,6 +62,11 @@ export const appModules = {
     FacilityTypesModule,
     StationSurveillanceModule,
     LoginModule,
+    EmployeeModule,
+    JobListModule,
+    EmployeePositionsModule,
+    AttendanceModule,
+    PerformanceEvaluationsModule,
   ],
   controllers: [AppController],
   providers: [

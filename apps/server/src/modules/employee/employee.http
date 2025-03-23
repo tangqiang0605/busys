@@ -1,0 +1,47 @@
+### GET方法
+GET http://localhost:3000/employee
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjU2NTgwNCwiZXhwIjoxNzQyNjUyMjA0fQ.NuFLTdt3SRQFVtDmALQgklYPuXn72rydWGgbHlWbU0Q
+
+### POST方法
+POST http://localhost:3000/employee
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjU2NTgwNCwiZXhwIjoxNzQyNjUyMjA0fQ.NuFLTdt3SRQFVtDmALQgklYPuXn72rydWGgbHlWbU0Q
+
+   {
+      "name": "郑十",
+      "birth_date": "1989-09-18T00:00:00Z",
+      "gender": "女",
+      "address": "西安市雁塔区",
+      "phone_number": "13200132000",
+      "id_type": "身份证",
+      "id_number": "110105198909181234"
+    }
+
+### PUT方法
+PUT http://localhost:3000/employee/1
+Content-Type: application/json
+Authorization: Bearer <你的token>
+
+{
+  "license_plate": "ABC123",
+  "vehicle_type": "电动",
+  "capacity": 45,
+  "purchase_date": "2023-01-01T00:00:00Z",
+  "status": "维修",
+  "vehicle_name": "电动公交车",
+  "price": 200000,
+  "manufacturer": "某厂家",
+  "model": "某型号",
+  "image_url": "http://example.com/image.jpg"
+}
+
+### DELETE方法
+DELETE http://localhost:3000/employee/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
+
+### GET方法
+GET http://localhost:3000/employee/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U

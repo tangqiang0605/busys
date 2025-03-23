@@ -1,0 +1,29 @@
+### Create Job
+POST http://localhost:3000/jobList
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjY1MzYzOSwiZXhwIjoxNzQyNzQwMDM5fQ.eKOt7wlo0xfuizrtlA8q-yQ5MhdrHeSA8irwiro9cfA
+
+{
+  "job_title": "高级司机",
+  "job_description": "高级司机",
+  "salary": 8000.0
+}
+
+### Read Job
+GET http://localhost:3000/jobList/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
+
+### Update Job
+PUT http://localhost:3000/jobList/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
+
+{
+  "job_title": "高级软件工程师",
+  "job_description": "负责复杂软件系统的开发和维护",
+  "salary": 30000.0
+}
+
+### Delete Job
+DELETE http://localhost:3000/jobList/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U

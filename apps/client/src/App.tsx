@@ -14,6 +14,11 @@ import FacilityTypeInfo from './pages/facility/FacilityTypeInfo';
 import FacilityInfo from './pages/facility/FacilityInfo';
 import StationSurveillance from './pages/station/StationMonitor';
 import UserInfo from './pages/user/userInfo';
+import EmployeeInfo from './pages/employee/employeeInfo';
+import JobList from './pages/employee/jobList';
+import EmployeePositionsInfo from './pages/employee/employeePositions';
+import AttendanceInfo from './pages/employee/attendance';
+import PerformanceEvaluationsInfo from './pages/employee/evaluation';
 
 const App = () => {
   return (
@@ -44,29 +49,41 @@ const App = () => {
           {/* <Route path="maintenance" element={<StationMaintenance />} /> */}
         </Route>
 
-
-
+        {/* 路线管理 */}
         <Route path='route'>
           <Route path='info' element={<RouteInfo />} />
           <Route path='schedule' element={<RouteSchedule />} />
         </Route>
 
+        {/* 车辆管理 */}
         <Route path="vehicle">
           <Route path="info" element={<VehicleInfo />} />
           {/* <Route path="schedule" element={<VehicleSchedule />} /> */}
           {/* <Route path="maintenance" element={<VehicleMaintenance />} /> */}
         </Route>
 
+        {/* 设施管理 */}
         <Route path='facility'>
           <Route path='facilityInfo' element={<FacilityInfo />}></Route>
           <Route path='facilityType' element={<FacilityTypeInfo />}></Route>
         </Route>
 
+        {/* 职工管理 */}
+        <Route path='staff'>
+          <Route path='info' element={<EmployeeInfo />}></Route>
+          <Route path='jobList' element={<JobList />}></Route>
+          <Route path='position' element={<EmployeePositionsInfo />}></Route>
+          <Route path='attendance' element={<AttendanceInfo />}></Route>
+          <Route path='evaluation' element={<PerformanceEvaluationsInfo />}></Route>
+        </Route>
+
+        {/* 用户管理 */}
         <Route path='user'>
           <Route path='userInfo' element={<UserInfo />}></Route>
         </Route>
-        <Route path='devtools' element={<DevTools />} />
 
+        {/* 开发者工具 */}
+        <Route path='devtools' element={<DevTools />} />
 
       </Route>
     </Routes>

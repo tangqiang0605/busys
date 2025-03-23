@@ -18,7 +18,7 @@ export class AppModule implements NestModule {
         //   path: '/user/read_role', method: RequestMethod.POST
         // },
         {
-          path: '/user/login',
+          path: '/token/login',
           method: RequestMethod.ALL,
         },
       )
