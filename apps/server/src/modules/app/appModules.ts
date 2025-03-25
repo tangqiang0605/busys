@@ -32,10 +32,19 @@ import { JobListModule } from '../jobList/jobList.module';
 import { EmployeePositionsModule } from '../employeePositions/employeePositions.module';
 import { AttendanceModule } from '../attendance/attendance.module';
 import { PerformanceEvaluationsModule } from '../performanceEvaluations/performanceEvaluations.module';
+import { MaintenanceRequestModule } from '../maintenanceRequest/maintenanceRequest.module';
+import { BillsModule } from '../bills/bills.module';
+import { StationMaintenanceModule } from '../stationMaintenance/stationMaintenance.module';
+import { SafetySurveillanceModule } from '../safetySurveillance/safetySurveillance.module';
+import { VehicleMaintenanceModule } from '../vehicleMaintenance/vehicleMaintenance.module';
+import { VehicleOperationModule } from '../vehicleOperation/vehicleOperation.module';
 // import { FacilitieModule } from '../fa/facilitie.module';
 
 export const appModules = {
   imports: [
+    VehicleOperationModule,
+    VehicleMaintenanceModule,
+    SafetySurveillanceModule,
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET, // 使用环境变量存储密钥
@@ -67,6 +76,9 @@ export const appModules = {
     EmployeePositionsModule,
     AttendanceModule,
     PerformanceEvaluationsModule,
+    MaintenanceRequestModule,
+    BillsModule,
+    StationMaintenanceModule,
   ],
   controllers: [AppController],
   providers: [

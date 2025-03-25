@@ -2,10 +2,10 @@ import { PageContainer } from '@ant-design/pro-components';
 import InfoTable from './InfoTable';
 
 /**
- * 车站监控管理
+ * 车站设施管理
  * @returns 
  */
-export default function StationSurveillance() {
+export default function StationFacilityInfo() {
   return (
     <div>
       <PageContainer>

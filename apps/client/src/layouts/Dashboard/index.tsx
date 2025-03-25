@@ -27,16 +27,18 @@ export default function Dashboard() {
     if (!accessToken) {
       // TODO 自动跳转
       console.log(`qihangtang ${accessTokenKey}不存在`)
-      // navigate('/login')
+      navigate('/login')
     }
 
     handleRoutes()
-
   }, [])
 
   const handleRoutes = async () => {
     const result = await getUserInfoApi()
     console.log('getUserInfo', result)
+    if (result.statusCode === 401) {
+      navigate('/login')
+    }
   }
   // let location = useLocation();
   return (<div

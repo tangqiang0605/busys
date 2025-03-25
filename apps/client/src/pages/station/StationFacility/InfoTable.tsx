@@ -1,23 +1,28 @@
 import { ProCard, ProTable, } from '@ant-design/pro-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { RootState } from '../../../store';
 import { useNavigate } from 'react-router';
-import { getDataFnFactory } from '../utils/factory';
+import { getDataFnFactory } from '../../../utils/factory';
+// import { Facility, createFacilityApi, getAllStationApi } from '../../../apis/station';
+import { FacilityForm } from './constants';
+import { defaultForm, tableSettings } from './constants';
 import { Button, message } from 'antd';
-import { incremented } from '../store/common';
-import { CreateForm } from './CreateForm';
-import { CommonTalbeProps } from './types';
+// TODO 搞一个common
+import { incremented } from '../../../store/common';
+import { CreateForm } from '../../../components/CreateForm';
+import { Facility, createFacilityApi, getAllFacilityApi } from '../../../apis/facility/facilityInfo';
+// import { Facility, createVehicleApi, getAllVehicleApi } from '../../../apis/vehicle/vehicle';
 
-export default function CommonTable<T>(props: CommonTalbeProps<T>) {
+export default function InfoTable() {
   const refreshTable = useSelector((state: RootState) => state.common.refreshTable);
   const [selections, setSelections] = useState<number[]>()
   const navigate = useNavigate();
-  const getData = getDataFnFactory<T[]>(navigate, props.getAllItemApi, props.keyName)
+  const getData = getDataFnFactory<Facility[]>(navigate, getAllFacilityApi, 'facility_id')
 
   const dispatch = useDispatch();
-  const onSubmit = async (values: T) => {
-    const result = await props.createItemApi(props.createItemValue ? props.createItemValue(values) : values)
+  const onSubmit = async (values: Facility) => {
+    const result = await createFacilityApi(values)
     if (result?.data) {
       message.success('创建成功')
       dispatch(
@@ -43,8 +48,7 @@ export default function CommonTable<T>(props: CommonTalbeProps<T>) {
     >
       <ProCard style={{ height: '100vh', overflow: 'auto' }}>
         <ProTable
-          params={{ timestamp: refreshTable }}
-          {...props.tableSettings}
+          {...tableSettings}
           rowSelection={{
             selectedRowKeys: selections,
             onChange(selectedRowKeys) {
@@ -55,17 +59,18 @@ export default function CommonTable<T>(props: CommonTalbeProps<T>) {
               }
             }
           }}
-          rowKey={props.keyName}
+          rowKey={'facility_id'}
+          params={{ timestamp: refreshTable, location: "station" }}
           request={getData}
           toolBarRender={() => [
-            <CreateForm<T>
+            <CreateForm<Facility>
               title="新增信息"
-              initForm={props.defaultForm}
+              initForm={defaultForm}
               onSubmit={onSubmit}
               triggerRender={() => {
                 return <Button type="primary">新增</Button>
               }} >
-              {props.CreateFormItem}
+              <FacilityForm />
             </CreateForm>
           ]}
         />

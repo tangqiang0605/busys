@@ -1,22 +1,23 @@
-### 所有
-GET http://localhost:3000/facility
+### GET方法
+GET http://localhost:3000/maintenanceRequest
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjgwMzcyNiwiZXhwIjoxNzQyODkwMTI2fQ.C9wRcBKAnIfYwBPESJ1_IV_0jLJbZmxl82uWxI4x4pI
 
-### 创建设施实例
-POST http://localhost:3000/facility
+### POST方法
+POST http://localhost:3000/maintenanceRequest
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjU2NTgwNCwiZXhwIjoxNzQyNjUyMjA0fQ.NuFLTdt3SRQFVtDmALQgklYPuXn72rydWGgbHlWbU0Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjgwMzcyNiwiZXhwIjoxNzQyODkwMTI2fQ.C9wRcBKAnIfYwBPESJ1_IV_0jLJbZmxl82uWxI4x4pI
 
 {
-  "facility_type_id":1,
-  "description":"监控1号",
-  "location":"station",
-  "owner_id":"1"
+  "request_date":"2023-01-01T00:00:00Z",
+  "maintenance_type":"facilities",
+  "maintenance_id":"1",
+  "request_type":"上报检修",
+  "request_description":"监控坏了"
 }
 
-### 更新车辆信息
-PUT http://localhost:3000/facility/1
+### PUT方法
+PUT http://localhost:3000/maintenanceRequest/1
 Content-Type: application/json
 Authorization: Bearer <你的token>
 
@@ -33,12 +34,12 @@ Authorization: Bearer <你的token>
   "image_url": "http://example.com/image.jpg"
 }
 
-### 删除车辆
-DELETE http://localhost:3000/facility/1
+### DELETE方法
+DELETE http://localhost:3000/maintenanceRequest/1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjgwMzcyNiwiZXhwIjoxNzQyODkwMTI2fQ.C9wRcBKAnIfYwBPESJ1_IV_0jLJbZmxl82uWxI4x4pI
 
-### 获取单个车辆信息
-GET http://localhost:3000/facility/1
+### GET方法
+GET http://localhost:3000/maintenanceRequest/1
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjgwMzcyNiwiZXhwIjoxNzQyODkwMTI2fQ.C9wRcBKAnIfYwBPESJ1_IV_0jLJbZmxl82uWxI4x4pI

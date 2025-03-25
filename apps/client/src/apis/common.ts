@@ -21,7 +21,7 @@ export function createCRUDApi<T>(item: string) {
   async function createItemApi(params: Partial<T>) {
     const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
 
-    const result = await fetch('/api/${item}', {
+    const result = await fetch(`/api/${item}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
