@@ -448,6 +448,16 @@ model Attendance {
   // 关联职工基本信息表
 }
 
+model LeaveRequests {
+  leave_id   Int       @id @default(autoincrement())
+  employee_id Int      @db.Integer
+  start_date DateTime  @db.Date
+  end_date   DateTime  @db.Date
+  reason     String
+  status     String    @db.VarChar(20)
+  updated_at DateTime  @default(now()) // 新增字段
+}
+
 // 绩效评估表：记录员工的绩效评估信息
 model PerformanceEvaluations {
   evaluation_id   Int      @id @default(autoincrement()) // 绩效评估 ID，主键

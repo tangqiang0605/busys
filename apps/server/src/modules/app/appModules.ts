@@ -38,6 +38,8 @@ import { StationMaintenanceModule } from '../stationMaintenance/stationMaintenan
 import { SafetySurveillanceModule } from '../safetySurveillance/safetySurveillance.module';
 import { VehicleMaintenanceModule } from '../vehicleMaintenance/vehicleMaintenance.module';
 import { VehicleOperationModule } from '../vehicleOperation/vehicleOperation.module';
+import { FareModule } from '../fare/fare.module';
+import { FareBillsModule } from '../fareBills/fareBills.module';
 // import { FacilitieModule } from '../fa/facilitie.module';
 
 export const appModules = {
@@ -79,6 +81,8 @@ export const appModules = {
     MaintenanceRequestModule,
     BillsModule,
     StationMaintenanceModule,
+    FareModule,
+    FareBillsModule,
   ],
   controllers: [AppController],
   providers: [

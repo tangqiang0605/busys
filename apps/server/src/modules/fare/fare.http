@@ -1,0 +1,50 @@
+### GET方法
+GET http://localhost:3000/fare
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
+
+### POST方法
+POST http://localhost:3000/fare
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
+
+{
+  "license_plate": "ABC133",
+  "vehicle_type": "电动",
+  "capacity": 40,
+  "purchase_date": "2023-01-01T00:00:00Z",
+  "status": "运行",
+  "vehicle_name": "电动公交车",
+  "price": 200000,
+  "manufacturer": "某厂家",
+  "model": "某型号",
+  "image_url": "http://example.com/image.jpg"
+}
+
+### PUT方法
+PUT http://localhost:3000/fare/1
+Content-Type: application/json
+Authorization: Bearer <你的token>
+
+{
+  "license_plate": "ABC123",
+  "vehicle_type": "电动",
+  "capacity": 45,
+  "purchase_date": "2023-01-01T00:00:00Z",
+  "status": "维修",
+  "vehicle_name": "电动公交车",
+  "price": 200000,
+  "manufacturer": "某厂家",
+  "model": "某型号",
+  "image_url": "http://example.com/image.jpg"
+}
+
+### DELETE方法
+DELETE http://localhost:3000/fare/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U
+
+### GET方法
+GET http://localhost:3000/fare/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjM0NTYsInVzZXJuYW1lIjoiZGVmYXVsdF91c2VybmFtZSIsIm1ldGFkYXRhIjp7ImRyaXZlcl9pZCI6IiJ9LCJpc19hY3RpdmUiOnRydWUsImlhdCI6MTc0MjQ3NjI1MiwiZXhwIjoxNzQyNTYyNjUyfQ.yH-Q0PHA0VEy_Mv38k8NbiVFFuw_t56m3jvZvoclb2U

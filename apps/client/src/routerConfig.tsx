@@ -19,12 +19,14 @@ import UserInfo from './pages/user/userInfo';
 import VehicleInfo from './pages/vehicle/VehicleInfo';
 import MaintenanceRequestInfo from './pages/station/StationMaintenanceRequest';
 import BillsInfo from './pages/station/BillsInfo';
+import VehicleBillsInfo from './pages/vehicle/BillsInfo';
 import StationMaintenanceInfo from './pages/station/StationMaintenance';
 import VehicleFacilityInfo from './pages/vehicle/VehicleFacility';
 import SafetySurveillanceInfo from './pages/vehicle/VehicleMonitor';
 import VehicleMaintenanceRequestInfo from './pages/vehicle/VehicleMaintenanceRequest';
 import VehicleMaintenanceInfo from './pages/vehicle/VehicleMaintenance';
 import VehicleOperationInfo from './pages/vehicle/VehicleOperation';
+import FareInfo from './pages/route/Fare';
 
 export const menuAndRouteData = [
   {
@@ -47,6 +49,7 @@ export const menuAndRouteData = [
     routes: [
       { path: "info", name: "路线信息管理", component: RouteInfo },
       { path: "schedule", name: "路线排班管理", component: RouteSchedule },
+      { path: "fare", name: "路线票价管理", component: FareInfo }
     ],
   },
   {
@@ -61,7 +64,7 @@ export const menuAndRouteData = [
       // { path: "request", name: "车辆维护申请", componet: BillsInfo },
       { path: "request", name: "车辆维护申请", component: VehicleMaintenanceRequestInfo },
       { path: "maintenance", name: "车辆维护情况", component: VehicleMaintenanceInfo },
-      { path: "bills", name: "车辆相关账单", component: BillsInfo },
+      { path: "bills", name: "车辆相关账单", component: VehicleBillsInfo },
       // { path: "schedule", name: "车辆调度系统", component: VehicleSchedule },
       // { path: "maintenance", name: "车辆维护提醒", component: VehicleMaintenance },
     ],
@@ -83,6 +86,8 @@ export const menuAndRouteData = [
     name: "设施管理",
     icon: <ShoppingOutlined />,
     routes: [
+      // {path:"request",name:"设施申请记录",component:},
+      // {path:""}
       { path: "info", name: "设施实例信息", component: FacilityInfo },
       { path: "type", name: "设施类型管理", component: FacilityTypeInfo },
     ],
