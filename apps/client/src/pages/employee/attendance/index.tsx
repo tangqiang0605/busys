@@ -1,4 +1,4 @@
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProFormDigit } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormDatePicker, ProFormSelect } from "@ant-design/pro-components";
 import { Attendance, createAttendanceApi, deleteAttendanceApi, getAllAttendanceApi, updateAttendanceApi } from '../../../apis/employee/attendance';
@@ -120,15 +120,15 @@ const defaultForm: Partial<Attendance> = {
 function AttendanceForm() {
   return (
     <ProForm.Group title="员工考勤信息" layout="horizontal">
-      <ProFormText
+      {/* <ProFormText
         rules={[{ required: true }]}
         width="md"
         name="attendance_id"
         label="考勤记录ID"
         disabled
         placeholder="请输入考勤记录ID"
-      />
-      <ProFormText
+      /> */}
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="employee_id"

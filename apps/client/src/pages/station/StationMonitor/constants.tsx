@@ -103,14 +103,14 @@ export function StationSurveillanceForm() {
         disabled
         placeholder="请输入监控信息ID"
       /> */}
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="facility_id"
         label="设施ID"
         placeholder="请输入设施ID"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="station_id"

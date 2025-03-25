@@ -123,14 +123,14 @@ export const defaultForm: Partial<Employee> = {
 export function EmployeeForm() {
   return (
     <ProForm.Group title="职工信息" layout="horizontal">
-      <ProFormText
+      {/* <ProFormText
         rules={[{ required: true }]}
         width="md"
         name="employee_id"
         label="职工ID"
         disabled
         placeholder="请输入职工ID"
-      />
+      /> */}
       <ProFormText
         rules={[{ required: true }]}
         width="md"

@@ -1,4 +1,4 @@
-import { ProColumnType, ProForm, ProFormText, ProFormSwitch } from "@ant-design/pro-components";
+import { ProColumnType, ProForm, ProFormText, ProFormSwitch, ProFormDigit } from "@ant-design/pro-components";
 import InfoAction from "./InfoAction";
 import { User } from "../../../apis/user/userInfo";
 // import { User } from "../";
@@ -124,7 +124,7 @@ export const defaultForm: Partial<User> = {
 export function UserForm() {
   return (
     <ProForm.Group title="用户信息" layout="horizontal">
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="user_id"
@@ -154,13 +154,13 @@ export function UserForm() {
         label="是否激活"
         placeholder="请选择是否激活"
       />
-      <ProFormText
+      <ProFormDigit
         width="md"
         name="metadata.worker_id"
         label="职工id"
         placeholder="请输入职工ID（可选）"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="role_id"

@@ -1,4 +1,4 @@
-import { PageContainer, ProFormDateTimePicker } from '@ant-design/pro-components';
+import { PageContainer, ProFormDateTimePicker, ProFormDigit } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
 import { SafetySurveillance, createSafetySurveillanceApi, deleteSafetySurveillanceApi, getAllSafetySurveillanceApi, updateSafetySurveillanceApi } from '../../../apis/vehicle/safetySurveillance';
@@ -122,7 +122,7 @@ function SafetySurveillanceForm() {
         label="监控内容"
         placeholder="请输入监控内容"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="facility_id"

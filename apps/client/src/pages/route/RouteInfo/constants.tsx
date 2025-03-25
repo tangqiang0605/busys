@@ -1,4 +1,4 @@
-import { ProColumnType, ProForm, ProFormText } from "@ant-design/pro-components"
+import { ProColumnType, ProForm, ProFormDigit, ProFormText } from "@ant-design/pro-components"
 import { Route } from "../../../apis/route";
 import InfoAction from "./InfoAction";
 
@@ -78,15 +78,15 @@ export function RouteDetailForm() {
   // TODO djr 提供下拉选项选择车站，而不是目前的文本输入
   return (
     <ProForm.Group title="路线信息" layout="horizontal">
-      <ProFormText
+      {/* <ProFormDigit
         rules={[{ required: true, message: '请输入路线id' }]}
         width="md"
         name="route_id"
         label="路线id"
         disabled
         placeholder="请输入路线id"
-      />
-      <ProFormText
+      /> */}
+      <ProFormDigit
         rules={[{ required: true, message: '请输入车站id' }]}
         width="md"
         name="station_id"

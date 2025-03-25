@@ -1,5 +1,5 @@
 
-import { ProColumnType, ProForm, ProFormText, ProFormSelect, ProFormTextArea, ProFormDateTimePicker } from "@ant-design/pro-components";
+import { ProColumnType, ProForm, ProFormText, ProFormSelect, ProFormTextArea, ProFormDateTimePicker, ProFormDigit } from "@ant-design/pro-components";
 import { MaintenanceRequest, deleteMaintenanceRequestApi, updateMaintenanceRequestApi, RequestType, MaintenanceType, ApprovalStatus, MaintenanceTypeMapper, createMaintenanceRequestApi, getAllMaintenance4VehicleFacilityRequestApi } from '../../../apis/station/maintenanceRequest';
 import createInfoActionComponent from '../../../components/CommonAction';
 import { CommonTalbeProps } from "../../../components/types";
@@ -166,7 +166,7 @@ function MaintenanceRequestForm() {
         disabled
         valueEnum={{ [MaintenanceType.facility]: '设施' }}
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="maintenance_id"

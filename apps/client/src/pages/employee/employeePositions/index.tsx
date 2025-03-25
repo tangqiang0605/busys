@@ -1,4 +1,4 @@
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProFormDigit } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormDatePicker } from "@ant-design/pro-components";
 import { EmployeePositions, createEmployeePositionsApi, deleteEmployeePositionsApi, getAllEmployeePositionsApi, updateEmployeePositionsApi } from '../../../apis/employee/employeePositions';
@@ -107,22 +107,22 @@ const defaultForm: Partial<EmployeePositions> = {
 function EmployeePositionsForm() {
   return (
     <ProForm.Group title="职工岗位信息" layout="horizontal">
-      <ProFormText
+      {/* <ProFormText
         rules={[{ required: true }]}
         width="md"
         name="position_id"
         label="岗位记录ID"
         disabled
         placeholder="请输入岗位记录ID"
-      />
-      <ProFormText
+      /> */}
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="employee_id"
         label="职工ID"
         placeholder="请输入职工ID"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="job_id"

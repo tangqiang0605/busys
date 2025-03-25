@@ -1,4 +1,4 @@
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProFormDigit } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormDatePicker, ProFormTextArea } from "@ant-design/pro-components";
 import { PerformanceEvaluations, createPerformanceEvaluationsApi, deletePerformanceEvaluationsApi, getAllPerformanceEvaluationsApi, updatePerformanceEvaluationsApi } from '../../../apis/employee/performanceEvaluations';
@@ -99,15 +99,15 @@ const defaultForm: Partial<PerformanceEvaluations> = {
 function PerformanceEvaluationsForm() {
   return (
     <ProForm.Group title="绩效评估信息" layout="horizontal">
-      <ProFormText
+      {/* <ProFormText
         rules={[{ required: true }]}
         width="md"
         name="evaluation_id"
         label="绩效评估ID"
         disabled
         placeholder="请输入绩效评估ID"
-      />
-      <ProFormText
+      /> */}
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="employee_id"

@@ -87,14 +87,14 @@ export const defaultForm: Partial<JobList> = {
 export function JobListForm() {
   return (
     <ProForm.Group title="岗位信息" layout="horizontal">
-      <ProFormText
+      {/* <ProFormText
         rules={[{ required: true }]}
         width="md"
         name="job_id"
         label="岗位ID"
         disabled
         placeholder="请输入岗位ID"
-      />
+      /> */}
       <ProFormText
         rules={[{ required: true }]}
         width="md"

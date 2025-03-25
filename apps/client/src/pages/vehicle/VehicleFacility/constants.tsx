@@ -1,4 +1,4 @@
-import { ProColumnType, ProForm, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
+import { ProColumnType, ProForm, ProFormDigit, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
 import { Facility, createFacilityApi, deleteFacilityApi, getAllFacilityApi, updateFacilityApi } from "../../../apis/facility/facilityInfo";
 import createInfoActionComponent from "../../../components/CommonAction";
 import { CommonTalbeProps } from "../../../components/types";
@@ -89,7 +89,7 @@ const defaultForm: Partial<VehicleFacility> = {
 function FacilityForm() {
   return (
     <ProForm.Group title="设施信息" layout="horizontal">
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="facility_type_id"
@@ -113,7 +113,7 @@ function FacilityForm() {
         disabled
         placeholder="请输入设施位置"
       />
-      <ProFormText
+      <ProFormDigit
         width="md"
         name="owner_id"
         label="所属ID"

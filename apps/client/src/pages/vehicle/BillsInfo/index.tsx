@@ -1,4 +1,4 @@
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProFormDigit } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormTextArea, ProFormDatePicker, ProFormSelect } from "@ant-design/pro-components";
 import { Bills, createBillApi, deleteBillApi, getAllBillsApi, updateBillApi } from '../../../apis/station/bills';
@@ -96,7 +96,7 @@ const defaultForm: Partial<Bills> = {
 function BillForm() {
   return (
     <ProForm.Group title="账单信息" layout="horizontal">
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="bill_id"

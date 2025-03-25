@@ -1,4 +1,4 @@
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProFormDigit } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormDatePicker, ProFormTextArea } from "@ant-design/pro-components";
 import { VehicleMaintenance, createVehicleMaintenanceApi, deleteVehicleMaintenanceApi, getAllVehicleMaintenanceApi, updateVehicleMaintenanceApi } from '../../../apis/vehicle/vehicleMaintenance';
@@ -133,21 +133,21 @@ function VehicleMaintenanceForm() {
         disabled
         placeholder="请输入维护记录ID"
       /> */}
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="vehicle_id"
         label="车辆ID"
         placeholder="请输入车辆ID"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="request_id"
         label="维护申请ID"
         placeholder="请输入维护申请ID"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="staff_id"

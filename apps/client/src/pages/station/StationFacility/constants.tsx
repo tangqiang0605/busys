@@ -1,4 +1,4 @@
-import { ProColumnType, ProForm, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
+import { ProColumnType, ProForm, ProFormDigit, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
 // import InfoAction from "./InfoAction";
 import { Facility, deleteFacilityApi, updateFacilityApi } from "../../../apis/facility/facilityInfo";
 import createInfoActionComponent from "../../../components/CommonAction";
@@ -89,7 +89,7 @@ export const defaultForm: Partial<Facility> = {
 export function FacilityForm() {
   return (
     <ProForm.Group title="设施信息" layout="horizontal">
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="facility_type_id"

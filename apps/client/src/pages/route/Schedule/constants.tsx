@@ -1,4 +1,4 @@
-import { ProColumnType, ProForm, ProFormText, ProFormTimePicker } from "@ant-design/pro-components"
+import { ProColumnType, ProForm, ProFormDigit, ProFormText, ProFormTimePicker } from "@ant-design/pro-components"
 import InfoAction from "./InfoAction";
 import { RouteSchedule } from "../../../apis/route/routeSchedule";
 
@@ -110,7 +110,7 @@ export function RouteScheduleForm() {
         label="班次名称"
         placeholder="请输入班次名称"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="route_id"

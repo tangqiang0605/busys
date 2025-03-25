@@ -1,4 +1,4 @@
-import { ProForm, ProFormDateTimePicker, ProFormTextArea, ProFormSelect, ProFormText, ProColumnType } from "@ant-design/pro-components";
+import { ProForm, ProFormDateTimePicker, ProFormTextArea, ProFormSelect, ProFormText, ProColumnType, ProFormDigit } from "@ant-design/pro-components";
 import { MaintenanceRequest, RequestType, MaintenanceType, ApprovalStatus, createMaintenanceRequestApi, getAllMaintenanceRequestsApi, MaintenanceTypeMapper, deleteMaintenanceRequestApi, updateMaintenanceRequestApi } from "../../../apis/station/maintenanceRequest";
 import { CommonTalbeProps } from "../../../components/types";
 import { dateTime2iso } from "../../../utils/time";
@@ -144,7 +144,7 @@ function MaintenanceRequestScheduleForm() {
         disabled
         valueEnum={{ [MaintenanceType.vehicle]: '车辆' }}
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="maintenance_id"

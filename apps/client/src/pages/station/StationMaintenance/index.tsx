@@ -1,4 +1,4 @@
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProFormDigit } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormDatePicker, ProFormTextArea } from "@ant-design/pro-components";
 import { StationMaintenance, createStationMaintenanceApi, deleteStationMaintenanceApi, getAllStationMaintenanceApi, updateStationMaintenanceApi } from '../../../apis/station/stationMaintenance';
@@ -124,7 +124,7 @@ const defaultForm: Partial<StationMaintenance> = {
 function StationMaintenanceForm() {
   return (
     <ProForm.Group title="车站维护记录信息" layout="horizontal">
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="maintenance_id"
@@ -132,7 +132,7 @@ function StationMaintenanceForm() {
         disabled
         placeholder="请输入维护记录ID"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="station_id"
