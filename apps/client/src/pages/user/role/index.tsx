@@ -1,9 +1,10 @@
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProFormList, ProFormSelect } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormTextArea } from "@ant-design/pro-components";
 import { Role, createRoleApi, deleteRoleApi, getAllRolesApi, updateRoleApi } from '../../../apis/user/role';
 import createInfoActionComponent from '../../../components/CommonAction';
 import { CommonTalbeProps } from "../../../components/types";
+import { FormListItemRender } from '../../../components/FormListItemRender';
 
 const InfoAction = createInfoActionComponent<Role>({
   entityName: '角色权限',
@@ -94,6 +95,18 @@ const defaultForm: Partial<Role> = {
   allowed_actions: [],
 };
 
+// 定义操作权限选项
+const actionOptions = [
+  { label: '允许通过物品审批', value: 'approve_items' },
+  { label: '允许通过新闻审批', value: 'approve_news' },
+  { label: '允许删除用户', value: 'delete_user' },
+  // 其他操作权限...
+];
+
+const routeActions = [
+  { label: "设施申请记录", value: 'facility/request' }
+]
+
 // 表单组件
 function RoleForm() {
   return (
@@ -113,19 +126,29 @@ function RoleForm() {
         label="角色名称"
         placeholder="请输入角色名称"
       />
-      <ProFormTextArea
+      {/* <ProFormTextArea
         rules={[{ required: true }]}
         width="md"
         name="allowed_routes"
         label="允许访问的路由"
         placeholder="请输入允许访问的路由（JSON数组格式）"
-      />
-      <ProFormTextArea
-        rules={[{ required: true }]}
+      /> */}
+      <ProFormSelect
+        mode="multiple"
+        // rules={[{ required: true }]}
         width="md"
+        name="allowed_routes"
+        label="允许访问的路由"
+        options={routeActions}
+      // rules={[{ required: true, message: '至少需要选择一个路由' }]}
+      />
+      <ProFormSelect
+        mode="multiple"
         name="allowed_actions"
         label="允许执行的操作"
-        placeholder="请输入允许执行的操作（JSON数组格式）"
+        placeholder="请选择允许执行的操作"
+        options={actionOptions}
+        rules={[{ required: true, message: '至少需要选择一个操作' }]}
       />
     </ProForm.Group>
   );
