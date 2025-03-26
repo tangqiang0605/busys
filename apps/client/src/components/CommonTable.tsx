@@ -17,7 +17,7 @@ export default function CommonTable<T>(props: CommonTalbeProps<T>) {
 
   const dispatch = useDispatch();
   const onSubmit = async (values: T) => {
-    const result = await props.createItemApi(props.createItemValue ? props.createItemValue(values) : values)
+    const result = await props.createItemApi!(props.createItemValue ? props.createItemValue(values) : values)
     if (result?.data) {
       message.success('创建成功')
       dispatch(
@@ -58,7 +58,7 @@ export default function CommonTable<T>(props: CommonTalbeProps<T>) {
           rowKey={props.keyName}
           request={getData}
           toolBarRender={() => [
-            <CreateForm<T>
+            props.CreateFormItem && <CreateForm<T>
               title="新增信息"
               initForm={props.defaultForm}
               onSubmit={onSubmit}

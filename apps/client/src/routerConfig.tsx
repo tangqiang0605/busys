@@ -27,6 +27,8 @@ import VehicleMaintenanceRequestInfo from './pages/vehicle/VehicleMaintenanceReq
 import VehicleMaintenanceInfo from './pages/vehicle/VehicleMaintenance';
 import VehicleOperationInfo from './pages/vehicle/VehicleOperation';
 import FareInfo from './pages/route/Fare';
+import FacilityRequestsInfo from './pages/facility/FacilityRequests';
+import FacilityAssignmentsInfo from './pages/facility/FacilityAssignments';
 
 export const menuAndRouteData = [
   {
@@ -70,6 +72,17 @@ export const menuAndRouteData = [
     ],
   },
   {
+    path: "facility",
+    name: "设施管理",
+    icon: <ShoppingOutlined />,
+    routes: [
+      { path: "request", name: "设施申请记录", component: FacilityRequestsInfo },
+      { path: "assignments", name: "设施发放记录", component: FacilityAssignmentsInfo },
+      { path: "info", name: "设施实例信息", component: FacilityInfo },
+      { path: "type", name: "设施类型管理", component: FacilityTypeInfo },
+    ],
+  },
+  {
     path: "driver",
     name: "司机管理",
     icon: <UserOutlined />,
@@ -80,18 +93,6 @@ export const menuAndRouteData = [
     ],
   },
 
-
-  {
-    path: "facility",
-    name: "设施管理",
-    icon: <ShoppingOutlined />,
-    routes: [
-      // {path:"request",name:"设施申请记录",component:},
-      // {path:""}
-      { path: "info", name: "设施实例信息", component: FacilityInfo },
-      { path: "type", name: "设施类型管理", component: FacilityTypeInfo },
-    ],
-  },
   {
     path: "staff",
     name: "职工管理",

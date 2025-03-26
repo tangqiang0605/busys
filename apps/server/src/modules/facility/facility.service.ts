@@ -2,11 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma/prisma.service';
 import { Facilitie, Prisma } from '@prisma/client';
 import { buildPageQuery } from 'src/common/utils';
-
-enum FacilityLocation {
-  Station = 'station',
-  Vehicle = 'vehicle',
-}
+import { FacilityLocation } from './types';
 
 @Injectable()
 export class FacilityService {
