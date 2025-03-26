@@ -58,7 +58,7 @@ export const appModules = {
     UserModule,
     DriverModule,
     EmployeeModule,
-    RoleModule,
+    // RoleModule,
     DriverInfoModule,
     DriverScheduleModule,
     FixedScheduleModule,
@@ -87,6 +87,7 @@ export const appModules = {
     FareBillsModule,
     FacilityRequestsModule,
     FacilityAssignmentsModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [

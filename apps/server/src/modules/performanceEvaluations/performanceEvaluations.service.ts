@@ -35,6 +35,30 @@ export class PerformanceEvaluationsService {
     return { data, total, pageNum, pageSize: take };
   }
 
+  async findAll4Driver(params: any) {
+    const driverEmployeeIds = await this.prisma.driverInfo.findMany({
+      select: {
+        employee_id: true,
+      },
+    });
+    const employeeIds = driverEmployeeIds.map((driver) => driver.employee_id);
+
+    const { skip, take, where, pageNum } = buildPageQuery(
+      params,
+      ['evaluation_id'],
+      [{ employee_id: { in: employeeIds } }],
+    );
+
+    const data = await this.prisma.performanceEvaluations.findMany({
+      skip,
+      take,
+      where,
+    });
+    const total = await this.prisma.performanceEvaluations.count({ where });
+
+    return { data, total, pageNum, pageSize: take };
+  }
+
   findOne(id: number) {
     return this.prisma.performanceEvaluations.findUnique({
       where: { evaluation_id: id },

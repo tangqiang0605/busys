@@ -1,4 +1,6 @@
 import { createCRUDApi } from "../common";
+import { accessTokenKey } from "../login";
+import { Response } from "../types";
 
 export interface PerformanceEvaluations {
   evaluation_id: number;
@@ -16,3 +18,18 @@ export const {
   updateItemApi: updatePerformanceEvaluationsApi,
   deleteItemApi: deletePerformanceEvaluationsApi,
 } = createCRUDApi<PerformanceEvaluations>('performanceEvaluations');
+
+export async function getAllDriverEvaluationsApi(params: Record<string, string>) {
+  const searchParams = new URLSearchParams(params);
+  const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '{}').data;
+  const result = await fetch(`/api/performanceEvaluations/driver?${searchParams.toString()}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${accessToken}`
+    }
+  })
+
+  const response = await result.json() as Response<{ total: number, pageNum: number, pageSize: number, data: Array<PerformanceEvaluations> }>
+  return response
+}

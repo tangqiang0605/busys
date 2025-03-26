@@ -44,10 +44,16 @@ export class PerformanceEvaluationsController {
     return this.performanceEvaluationsService.findAll(query);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.performanceEvaluationsService.findOne(+id);
+  @Get('driver')
+  @UseInterceptors(createCacheBusterInterceptor(['timestamp', 'timeStamp']))
+  findAll4Dirver(@Query() query: any) {
+    return this.performanceEvaluationsService.findAll4Driver(query);
   }
+
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.performanceEvaluationsService.findOne(+id);
+  // }
 
   @Patch(':id')
   update(

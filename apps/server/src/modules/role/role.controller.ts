@@ -1,19 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  Query,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { RoleService } from './role.service';
 import { Prisma } from '@prisma/client';
+import { createCacheBusterInterceptor } from 'src/common/interceptors/cache-buster.interceptor';
 
 @Controller('role')
 export class RoleController {
-  constructor(private readonly roleService: RoleService) { }
+  constructor(private readonly roleService: RoleService) {}
 
   @Post()
-  create(@Body() createRoleDto: Prisma.RoleCreateInput) {
-    return this.roleService.create(createRoleDto);
+  async create(@Body() createRoleDto: Prisma.RoleCreateInput) {
+    try {
+      const result = await this.roleService.create(createRoleDto);
+      return result;
+    } catch (err) {
+      throw new HttpException(err, HttpStatus.BAD_REQUEST);
+    }
   }
 
   @Get()
-  findAll() {
-    return this.roleService.findAll();
+  @UseInterceptors(createCacheBusterInterceptor(['timestamp', 'timeStamp']))
+  findAll(@Query() query: any) {
+    return this.roleService.findAll(query);
   }
 
   @Get(':id')
@@ -22,8 +41,10 @@ export class RoleController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRoleDto: Prisma.
-    RoleUpdateInput) {
+  update(
+    @Param('id') id: string,
+    @Body() updateRoleDto: Prisma.RoleUpdateInput,
+  ) {
     return this.roleService.update(+id, updateRoleDto);
   }
 
@@ -31,4 +52,4 @@ export class RoleController {
   remove(@Param('id') id: string) {
     return this.roleService.remove(+id);
   }
-};
+}

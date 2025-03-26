@@ -29,6 +29,8 @@ import VehicleOperationInfo from './pages/vehicle/VehicleOperation';
 import FareInfo from './pages/route/Fare';
 import FacilityRequestsInfo from './pages/facility/FacilityRequests';
 import FacilityAssignmentsInfo from './pages/facility/FacilityAssignments';
+import RoleInfo from './pages/user/role';
+import DriverEvaluationsInfo from './pages/driver/DriverEvaluation';
 
 export const menuAndRouteData = [
   {
@@ -89,7 +91,7 @@ export const menuAndRouteData = [
     routes: [
       { path: "info", name: "司机信息管理", component: DriverInfo },
       { path: "schedule", name: "司机排班系统", component: DriverSchedule },
-      { path: "evaluation", name: "司机绩效评估", component: DriverEvaluation },
+      { path: "evaluation", name: "司机绩效评估", component: DriverEvaluationsInfo },
     ],
   },
 
@@ -99,10 +101,10 @@ export const menuAndRouteData = [
     icon: <TeamOutlined />,
     routes: [
       { path: "info", name: "职工信息管理", component: EmployeeInfo },
-      { path: "jobList", name: "岗位信息表", component: JobList },
-      { path: "position", name: "任岗情况", component: EmployeePositionsInfo },
-      { path: "attendance", name: "考勤管理", component: AttendanceInfo },
-      { path: "evaluation", name: "绩效评估", component: PerformanceEvaluationsInfo },
+      { path: "jobList", name: "岗位信息习惯", component: JobList },
+      { path: "position", name: "职工任岗情况", component: EmployeePositionsInfo },
+      { path: "attendance", name: "职工考勤管理", component: AttendanceInfo },
+      { path: "evaluation", name: "职工绩效评估", component: PerformanceEvaluationsInfo },
     ],
   },
   {
@@ -111,6 +113,9 @@ export const menuAndRouteData = [
     icon: <TeamOutlined />,
     routes: [
       { path: "info", name: "账号信息管理", component: UserInfo },
+      {
+        path: 'role', name: "角色权限管理", component: RoleInfo
+      }
     ],
   },
   {
