@@ -10,7 +10,7 @@ import { RootState } from "../../../store";
  * 账单信息管理
  * @returns 
  */
-export default function BillsInfo() {
+export default function VehicleBillsInfo() {
   const refreshTable = useSelector((state: RootState) => state.common.refreshTable)
   return (
     <div>

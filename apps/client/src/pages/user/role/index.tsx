@@ -5,6 +5,9 @@ import { Role, createRoleApi, deleteRoleApi, getAllRolesApi, updateRoleApi } fro
 import createInfoActionComponent from '../../../components/CommonAction';
 import { CommonTalbeProps } from "../../../components/types";
 import { FormListItemRender } from '../../../components/FormListItemRender';
+import { menuAndRouteData } from '../../../routes/config';
+import { generateRouteActions } from '../../../routes/format';
+import { useMemo } from 'react';
 
 const InfoAction = createInfoActionComponent<Role>({
   entityName: '角色权限',
@@ -103,12 +106,11 @@ const actionOptions = [
   // 其他操作权限...
 ];
 
-const routeActions = [
-  { label: "设施申请记录", value: 'facility/request' }
-]
+// const routeActions = 
 
 // 表单组件
 function RoleForm() {
+  const routeActions = useMemo(() => { return generateRouteActions(menuAndRouteData) }, [])
   return (
     <ProForm.Group title="角色权限信息" layout="horizontal">
       <ProFormText
@@ -126,13 +128,6 @@ function RoleForm() {
         label="角色名称"
         placeholder="请输入角色名称"
       />
-      {/* <ProFormTextArea
-        rules={[{ required: true }]}
-        width="md"
-        name="allowed_routes"
-        label="允许访问的路由"
-        placeholder="请输入允许访问的路由（JSON数组格式）"
-      /> */}
       <ProFormSelect
         mode="multiple"
         // rules={[{ required: true }]}

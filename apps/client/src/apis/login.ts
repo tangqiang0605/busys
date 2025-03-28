@@ -28,7 +28,7 @@ export async function tryLoginApi(params: { id: string, password: string }): Pro
  */
 export async function getUserInfoApi() {
   const accessToken = JSON.parse(localStorage.getItem(accessTokenKey) || '').data;
-  console.log(accessToken)
+  // console.log(accessToken)
   const result = await fetch('/api/token/getinfo', {
     method: 'GET',
     headers: {

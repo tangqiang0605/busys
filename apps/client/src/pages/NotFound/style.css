@@ -1,0 +1,31 @@
+/* NotFoundPage.css */
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+  /* 背景颜色 */
+  flex-direction: column;
+}
+
+.ant-result {
+  text-align: center;
+}
+
+.ant-result-title {
+  font-size: 48px;
+  color: #1890ff;
+  /* 标题颜色 */
+}
+
+.ant-result-subtitle {
+  font-size: 20px;
+  color: #666;
+  /* 副标题颜色 */
+}
+
+.ant-btn-primary {
+  font-size: 16px;
+  padding: 10px 20px;
+}

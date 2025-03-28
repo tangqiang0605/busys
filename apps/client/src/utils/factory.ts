@@ -30,3 +30,50 @@ export const getDataFnFactory = <T extends any[]>(navigate: any, fn: (query: any
     };
   }
 }
+
+export function generateMenuData(data: any[]): any[] {
+  return data.map((item) => ({
+    path: `/${item.path}`, // 拼接为绝对路径
+    name: item.name,
+    icon: item.icon,
+    routes: item.routes
+      ? generateMenuData(item.routes.map((subItem: any) => ({
+        ...subItem,
+        path: `${item.path}/${subItem.path}`, // 拼接子路径
+      })))
+      : undefined,
+  }));
+}
+
+type Route = {
+  path: string;
+  name: string;
+  icon?: any;
+  routes?: Route[];
+};
+export function filterRoutes(routes: Route[], allowedPaths: string[]): Route[] {
+  return routes
+    .map((route) => {
+      // 如果当前路由的路径在 allowedPaths 中，保留该路由
+      if (allowedPaths.includes(route.path)) {
+        return route;
+      }
+
+      // 如果当前路由有子路由，递归筛选子路由
+      if (route.routes) {
+        const filteredSubRoutes = filterRoutes(route.routes, allowedPaths);
+
+        // 如果子路由中有符合条件的路由，保留当前路由并更新其子路由
+        if (filteredSubRoutes.length > 0) {
+          return {
+            ...route,
+            routes: filteredSubRoutes,
+          };
+        }
+      }
+
+      // 如果当前路由及其子路由都不符合条件，返回 null
+      return null;
+    })
+    .filter((route): route is Route => route !== null); // 过滤掉 null 值
+}
