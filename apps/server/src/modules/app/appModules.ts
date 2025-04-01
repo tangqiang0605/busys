@@ -5,7 +5,7 @@ import { PrismaModule } from '../../common/prisma/prisma.module';
 
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TransformInterceptor } from '../../common/interceptors/transformInterceptor';
 import { DriverModule } from '../driver/driver.module';
 
@@ -42,6 +42,8 @@ import { FareModule } from '../fare/fare.module';
 import { FareBillsModule } from '../fareBills/fareBills.module';
 import { FacilityRequestsModule } from '../facilityRequests/facilityRequests.module';
 import { FacilityAssignmentsModule } from '../facilityAssignments/facilityAssignments.module';
+import { TokenGuard } from 'src/common/guards/TokenGuard';
+import { RoleGuard } from 'src/common/guards/RoleGuard';
 // import { FacilitieModule } from '../fa/facilitie.module';
 
 export const appModules = {
@@ -98,6 +100,14 @@ export const appModules = {
       useClass: TransformInterceptor,
     },
     KeepAliveService,
+    {
+      provide: APP_GUARD,
+      useClass: TokenGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RoleGuard,
+    },
     // CacheBusterInterceptor
   ],
 };

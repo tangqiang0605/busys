@@ -8,12 +8,14 @@ import {
   Request,
 } from '@nestjs/common';
 import { LoginService } from './login.service';
+import { NoTokenRequired } from 'src/common/decorators/NoTokenRequired';
 
 @Controller('token')
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
   @Post('login')
+  @NoTokenRequired()
   async login(@Body() loginInfo: { id: string; password: string }) {
     const user_id = Number(loginInfo.id);
     if (Number.isNaN(user_id)) {

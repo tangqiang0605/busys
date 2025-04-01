@@ -50,10 +50,10 @@ const App = () => {
       }
     }
     // 目标路由是否可访问（url进入）
-    // TODO 进行对比
-    console.log('qihangtang 当前路由', location.pathname, validUserInfo?.role.allowed_routes.includes(location.pathname), validUserInfo?.role.allowed_routes)
-    if (location.pathname == '/' || validUserInfo?.role.allowed_routes.includes(location.pathname)) {
-      // messageApi.error('')
+    if (location.pathname == '/') {
+      navigate(validUserInfo?.role.allowed_routes[0] as string)
+    } else if (validUserInfo?.role.allowed_routes.includes(location.pathname)) {
+      // 允许
     } else {
       navigate('/404')
     }
@@ -61,7 +61,8 @@ const App = () => {
 
   const oldPathname = useRef('')
   useEffect(() => {
-    if (oldPathname.current !== location.pathname) {
+    const publicPages = ['/login'];
+    if (oldPathname.current !== location.pathname && !publicPages.includes(location.pathname)) {
       canUserAccess()
       oldPathname.current = location.pathname;
     }
@@ -74,7 +75,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path='/404' element={<NotFoundPage />} />
         <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to={userInfo?.role.allowed_routes[0] ?? '/'} replace />} />
+          {/* NOTE 这个东西影响跳到Login页面 */}
+          {/* <Route index element={<Navigate to={userInfo?.role.allowed_routes[0] ?? '/'} replace />} /> */}
           {menuAndRouteData.map((item) => (
             <Route key={item.path} path={`/${item.path}`} element={<Outlet />} >
               {item.routes?.map((subItem) => (

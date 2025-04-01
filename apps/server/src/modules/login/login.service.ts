@@ -3,6 +3,7 @@ import { PrismaService } from '../../common/prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import { hashPassword } from './utils';
+import { JWTPayload } from './types';
 
 @Injectable()
 export class LoginService {
@@ -41,7 +42,7 @@ export class LoginService {
 
   generateTokens(user: User) {
     const { user_id, username, metadata, is_active } = user;
-    const payload = { user_id, username, metadata, is_active };
+    const payload: JWTPayload = { user_id, username, metadata, is_active };
 
     Logger.debug(`环境变量jwt-secret${process.env.JWT_SECRET}`);
 
