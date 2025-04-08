@@ -215,7 +215,7 @@ const DynamicSettings = () => {
     }
   }
 
-  const getData = getDataFnFactory<DirverInfo>(navigate, getAllDriverApi, 'driver_id')
+  const getData = getDataFnFactory<DirverInfo[]>(navigate, getAllDriverApi, 'driver_id')
   // const getData = useCallback(getDataFnFactory(navigate, getAllDriver), [navigate]);
   return (
     <ProCard

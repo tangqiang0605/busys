@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  Query,
+} from '@nestjs/common';
 import { StationService } from './station.service';
 import { Prisma } from '@prisma/client';
 import { createCacheBusterInterceptor } from '../../common/interceptors/cache-buster.interceptor';
 
 @Controller('station')
 export class StationController {
-  constructor(private readonly stationService: StationService) { }
+  constructor(private readonly stationService: StationService) {}
 
   @Post()
   create(@Body() createStationDto: Prisma.StationCreateInput) {
@@ -24,8 +34,10 @@ export class StationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStationDto: Prisma.
-    StationUpdateInput) {
+  update(
+    @Param('id') id: string,
+    @Body() updateStationDto: Prisma.StationUpdateInput,
+  ) {
     return this.stationService.update(+id, updateStationDto);
   }
 
@@ -33,4 +45,4 @@ export class StationController {
   remove(@Param('id') id: string) {
     return this.stationService.remove(+id);
   }
-};
+}

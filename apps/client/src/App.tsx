@@ -1,5 +1,5 @@
 
-import { Routes, Route, Outlet, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Layout from './components/Dashboard/index';
 import Login from './pages/Login';
 import { menuAndRouteData } from './routes/config';
@@ -75,8 +75,6 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path='/404' element={<NotFoundPage />} />
         <Route path="/" element={<Layout />}>
-          {/* NOTE 这个东西影响跳到Login页面 */}
-          {/* <Route index element={<Navigate to={userInfo?.role.allowed_routes[0] ?? '/'} replace />} /> */}
           {menuAndRouteData.map((item) => (
             <Route key={item.path} path={`/${item.path}`} element={<Outlet />} >
               {item.routes?.map((subItem) => (
