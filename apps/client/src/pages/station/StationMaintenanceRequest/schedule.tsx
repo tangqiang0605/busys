@@ -144,7 +144,7 @@ function MaintenanceRequestScheduleForm() {
         disabled
         valueEnum={{ [MaintenanceType.station]: '车站' }}
       />
-      <ProFormDigit
+      <ProFormText
         rules={[{ required: true }]}
         width="md"
         name="maintenance_id"

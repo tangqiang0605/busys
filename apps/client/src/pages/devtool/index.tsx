@@ -13,7 +13,7 @@ function DevTools() {
 
       <Button onClick={() => {
         dispatch(clearUser())
-      }}>清楚store的userInfo</Button>
+      }}>清除store的userInfo</Button>
     </div>
   )
 }

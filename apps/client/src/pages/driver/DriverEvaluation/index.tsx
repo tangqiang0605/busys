@@ -1,9 +1,10 @@
 import { PageContainer, ProFormDigit } from '@ant-design/pro-components';
 import CommonTable from '../../../components/CommonTable';
 import { ProColumnType, ProForm, ProFormText, ProFormDatePicker, ProFormTextArea } from "@ant-design/pro-components";
-import { PerformanceEvaluations, createPerformanceEvaluationsApi, deletePerformanceEvaluationsApi, getAllDriverEvaluationsApi, getAllPerformanceEvaluationsApi, updatePerformanceEvaluationsApi } from '../../../apis/employee/performanceEvaluations';
+import { PerformanceEvaluations, createPerformanceEvaluationsApi, deletePerformanceEvaluationsApi, getAllDriverEvaluationsApi,  updatePerformanceEvaluationsApi } from '../../../apis/employee/performanceEvaluations';
 import createInfoActionComponent from '../../../components/CommonAction';
 import { CommonTalbeProps } from "../../../components/types";
+import { ymd2iso } from '../../../utils/time';
 
 const InfoAction = createInfoActionComponent<PerformanceEvaluations>({
   entityName: '绩效评估',
@@ -129,7 +130,7 @@ function PerformanceEvaluationsForm() {
         label="评估指标"
         placeholder="请输入评估指标（JSON格式）"
       />
-      <ProFormText
+      <ProFormDigit
         rules={[{ required: true }]}
         width="md"
         name="total_score"
@@ -146,7 +147,13 @@ const commonTalbeProps: CommonTalbeProps<PerformanceEvaluations> = {
   tableSettings,
   createItemApi: createPerformanceEvaluationsApi,
   getAllItemApi: getAllDriverEvaluationsApi,
-  keyName: 'evaluation_id'
+  keyName: 'evaluation_id',
+      createItemValue: (values) => {
+    if (values.evaluation_date) {
+      values.evaluation_date = ymd2iso(values.evaluation_date)
+    }
+    return values
+  }
 };
 
 /**

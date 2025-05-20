@@ -120,7 +120,7 @@ export default function DetailModal(props: { route: Route }) {
 
   // 添加车站到路线
   const onSubmit = async (values: RouteDetail) => {
-    const result = await createRouteDetailApi(values)
+    const result = await createRouteDetailApi({...values,route_id:(props.route.route_id)})
     // TODO 路线增加车站的接口异常处理，比如车站不存在
     if (result?.data) {
       message.success('创建成功啦')

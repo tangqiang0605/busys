@@ -12,9 +12,7 @@ export class FareService {
   }
 
   async findAll(params: any) {
-    const { skip, take, where, pageNum } = buildPageQuery(params, [
-      'fare_id',
-    ]);
+    const { skip, take, where, pageNum } = buildPageQuery(params, ['fare_id']);
     const data = await this.prisma.fare.findMany({
       skip,
       take,
